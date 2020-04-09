@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="es"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"><script type="text/javascript" async="" src="ip.json"></script>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="fb:pages" content="115407078489594">
+<meta name="description" content="Una breve introducción a los flujos de trabajo de Git más habituales, entre ellos, el flujo de trabajo centralizado, el flujo de trabajo de rama de función, el flujo de trabajo de Gitflow y el flujo de trabajo de bifurcación.">
+<meta name="author" content="Atlassian">
+<link rel="canonical" href="https://www.atlassian.com/es/git/tutorials/comparing-workflows">
+<title>Flujo de trabajo de Git | Atlassian Git Tutorial</title>
+<style>body { display: none; }</style>
+<link rel="alternate" href="https://www.atlassian.com/git/tutorials/comparing-workflows" hreflang="x-default">
+<link rel="alternate" href="https://www.atlassian.com/git/tutorials/comparing-workflows" hreflang="en">
+<link rel="alternate" href="https://www.atlassian.com/ja/git/tutorials/comparing-workflows" hreflang="ja">
+<link rel="alternate" href="https://www.atlassian.com/fr/git/tutorials/comparing-workflows" hreflang="fr">
+<link rel="alternate" href="https://www.atlassian.com/de/git/tutorials/comparing-workflows" hreflang="de">
+<link rel="alternate" href="https://www.atlassian.com/es/git/tutorials/comparing-workflows" hreflang="es">
+<link rel="alternate" href="https://www.atlassian.com/br/git/tutorials/comparing-workflows" hreflang="pt-BR">
+<link rel="alternate" href="https://www.atlassian.com/ro/git/tutorials/comparing-workflows" hreflang="ro">
+<link rel="apple-touch-icon-precomposed" sizes="57x57" href="https://wac-cdn.atlassian.com/assets/img/favicons/gitguide/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://wac-cdn.atlassian.com/assets/img/favicons/gitguide/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://wac-cdn.atlassian.com/assets/img/favicons/gitguide/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://wac-cdn.atlassian.com/assets/img/favicons/gitguide/apple-touch-icon-144x144.png">
+<link rel="apple-touch-icon-precomposed" sizes="120x120" href="https://wac-cdn.atlassian.com/assets/img/favicons/gitguide/apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon-precomposed" sizes="152x152" href="https://wac-cdn.atlassian.com/assets/img/favicons/gitguide/apple-touch-icon-152x152.png">
+<link rel="icon" type="image/png" href="https://wac-cdn.atlassian.com/assets/img/favicons/gitguide/favicon.png" sizes="32x32">
+<link rel="mask-icon" href="https://wac-cdn.atlassian.com/assets/img/favicons/gitguide/safari-pinned-tab.svg" color="#59afe1">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="https://wac-cdn.atlassian.com/assets/img/favicons/gitguide/mstile-144x144.png">
+<meta name="theme-color" content="#205081">
+<meta property="og:title" content="Flujo de trabajo de Git | Atlassian Git Tutorial">
+<meta property="og:description" content="Una breve introducción a los flujos de trabajo de Git más habituales, entre ellos, el flujo de trabajo centralizado, el flujo de trabajo de rama de función, el flujo de trabajo de Gitflow y el flujo de trabajo de bifurcación.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.atlassian.com/es/git/tutorials/comparing-workflows">
+<meta property="og:site_name" content="Atlassian">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@Atlassian">
+<style>
+/*we are adding this so to prevent content re-flow of the lazy loaded images*/
+img:not([src]) {
+opacity: 0;
+}
+</style>
+<script src="jquery.js"></script>
+<script type="text/javascript" src="1096093.js"></script>
+<script type="text/javascript">
+var LOCALIZED_PRICING_CONTENTFUL_SPACE = "3s3v3nq72la0";
+var LOCALIZED_PRICING_CONTENTFUL_ENVIRONMENT = "master";
+var LOCALIZED_PRICING_CONTENTFUL_ACCESS_TOKEN = "b9c3ea8d9c664146e9c7dd136a1d40ff8415715c3ef8ee222536f36fb2056613";
+var LOCALIZED_PRICING_USE_GEO_CURRENCY = true;
+</script>
+<script type="text/javascript">
+window.NREUM||(NREUM={}),__nr_require=function(t,e,n){function r(n){if(!e[n]){var o=e[n]={exports:{}};t[n][0].call(o.exports,function(e){var o=t[n][1][e];return r(o||e)},o,o.exports)}return e[n].exports}if("function"==typeof __nr_require)return __nr_require;for(var o=0;o<n.length;o++)r(n[o]);return r}({1:[function(t,e,n){function r(t){try{s.console&&console.log(t)}catch(e){}}var o,i=t("ee"),a=t(23),s={};try{o=localStorage.getItem("__nr_flags").split(","),console&&"function"==typeof console.log&&(s.console=!0,o.indexOf("dev")!==-1&&(s.dev=!0),o.indexOf("nr_dev")!==-1&&(s.nrDev=!0))}catch(c){}s.nrDev&&i.on("internal-error",function(t){r(t.stack)}),s.dev&&i.on("fn-err",function(t,e,n){r(n.stack)}),s.dev&&(r("NR AGENT IN DEVELOPMENT MODE"),r("flags: "+a(s,function(t,e){return t}).join(", ")))},{}],2:[function(t,e,n){function r(t,e,n,r,s){try{l?l-=1:o(s||new UncaughtException(t,e,n),!0)}catch(f){try{i("ierr",[f,c.now(),!0])}catch(d){}}return"function"==typeof u&&u.apply(this,a(arguments))}function UncaughtException(t,e,n){this.message=t||"Uncaught error with no additional information",this.sourceURL=e,this.line=n}function o(t,e){var n=e?null:c.now();i("err",[t,n])}var i=t("handle"),a=t(24),s=t("ee"),c=t("loader"),f=t("gos"),u=window.onerror,d=!1,p="nr@seenError",l=0;c.features.err=!0,t(1),window.onerror=r;try{throw new Error}catch(h){"stack"in h&&(t(13),t(12),"addEventListener"in window&&t(6),c.xhrWrappable&&t(14),d=!0)}s.on("fn-start",function(t,e,n){d&&(l+=1)}),s.on("fn-err",function(t,e,n){d&&!n[p]&&(f(n,p,function(){return!0}),this.thrown=!0,o(n))}),s.on("fn-end",function(){d&&!this.thrown&&l>0&&(l-=1)}),s.on("internal-error",function(t){i("ierr",[t,c.now(),!0])})},{}],3:[function(t,e,n){t("loader").features.ins=!0},{}],4:[function(t,e,n){function r(){j++,L=y.hash,this[u]=x.now()}function o(){j--,y.hash!==L&&i(0,!0);var t=x.now();this[h]=~~this[h]+t-this[u],this[d]=t}function i(t,e){E.emit("newURL",[""+y,e])}function a(t,e){t.on(e,function(){this[e]=x.now()})}var s="-start",c="-end",f="-body",u="fn"+s,d="fn"+c,p="cb"+s,l="cb"+c,h="jsTime",m="fetch",v="addEventListener",w=window,y=w.location,x=t("loader");if(w[v]&&x.xhrWrappable){var g=t(10),b=t(11),E=t(8),R=t(6),O=t(13),C=t(7),P=t(14),T=t(9),N=t("ee"),S=N.get("tracer");t(16),x.features.spa=!0;var L,j=0;N.on(u,r),N.on(p,r),N.on(d,o),N.on(l,o),N.buffer([u,d,"xhr-done","xhr-resolved"]),R.buffer([u]),O.buffer(["setTimeout"+c,"clearTimeout"+s,u]),P.buffer([u,"new-xhr","send-xhr"+s]),C.buffer([m+s,m+"-done",m+f+s,m+f+c]),E.buffer(["newURL"]),g.buffer([u]),b.buffer(["propagate",p,l,"executor-err","resolve"+s]),S.buffer([u,"no-"+u]),T.buffer(["new-jsonp","cb-start","jsonp-error","jsonp-end"]),a(P,"send-xhr"+s),a(N,"xhr-resolved"),a(N,"xhr-done"),a(C,m+s),a(C,m+"-done"),a(T,"new-jsonp"),a(T,"jsonp-end"),a(T,"cb-start"),E.on("pushState-end",i),E.on("replaceState-end",i),w[v]("hashchange",i,!0),w[v]("load",i,!0),w[v]("popstate",function(){i(0,j>1)},!0)}},{}],5:[function(t,e,n){function r(t){}if(window.performance&&window.performance.timing&&window.performance.getEntriesByType){var o=t("ee"),i=t("handle"),a=t(13),s=t(12),c="learResourceTimings",f="addEventListener",u="resourcetimingbufferfull",d="bstResource",p="resource",l="-start",h="-end",m="fn"+l,v="fn"+h,w="bstTimer",y="pushState",x=t("loader");x.features.stn=!0,t(8);var g=NREUM.o.EV;o.on(m,function(t,e){var n=t[0];n instanceof g&&(this.bstStart=x.now())}),o.on(v,function(t,e){var n=t[0];n instanceof g&&i("bst",[n,e,this.bstStart,x.now()])}),a.on(m,function(t,e,n){this.bstStart=x.now(),this.bstType=n}),a.on(v,function(t,e){i(w,[e,this.bstStart,x.now(),this.bstType])}),s.on(m,function(){this.bstStart=x.now()}),s.on(v,function(t,e){i(w,[e,this.bstStart,x.now(),"requestAnimationFrame"])}),o.on(y+l,function(t){this.time=x.now(),this.startPath=location.pathname+location.hash}),o.on(y+h,function(t){i("bstHist",[location.pathname+location.hash,this.startPath,this.time])}),f in window.performance&&(window.performance["c"+c]?window.performance[f](u,function(t){i(d,[window.performance.getEntriesByType(p)]),window.performance["c"+c]()},!1):window.performance[f]("webkit"+u,function(t){i(d,[window.performance.getEntriesByType(p)]),window.performance["webkitC"+c]()},!1)),document[f]("scroll",r,{passive:!0}),document[f]("keypress",r,!1),document[f]("click",r,!1)}},{}],6:[function(t,e,n){function r(t){for(var e=t;e&&!e.hasOwnProperty(u);)e=Object.getPrototypeOf(e);e&&o(e)}function o(t){s.inPlace(t,[u,d],"-",i)}function i(t,e){return t[1]}var a=t("ee").get("events"),s=t(26)(a,!0),c=t("gos"),f=XMLHttpRequest,u="addEventListener",d="removeEventListener";e.exports=a,"getPrototypeOf"in Object?(r(document),r(window),r(f.prototype)):f.prototype.hasOwnProperty(u)&&(o(window),o(f.prototype)),a.on(u+"-start",function(t,e){var n=t[1],r=c(n,"nr@wrapped",function(){function t(){if("function"==typeof n.handleEvent)return n.handleEvent.apply(n,arguments)}var e={object:t,"function":n}[typeof n];return e?s(e,"fn-",null,e.name||"anonymous"):n});this.wrapped=t[1]=r}),a.on(d+"-start",function(t){t[1]=this.wrapped||t[1]})},{}],7:[function(t,e,n){function r(t,e,n){var r=t[e];"function"==typeof r&&(t[e]=function(){var t=r.apply(this,arguments);return o.emit(n+"start",arguments,t),t.then(function(e){return o.emit(n+"end",[null,e],t),e},function(e){throw o.emit(n+"end",[e],t),e})})}var o=t("ee").get("fetch"),i=t(23);e.exports=o;var a=window,s="fetch-",c=s+"body-",f=["arrayBuffer","blob","json","text","formData"],u=a.Request,d=a.Response,p=a.fetch,l="prototype";u&&d&&p&&(i(f,function(t,e){r(u[l],e,c),r(d[l],e,c)}),r(a,"fetch",s),o.on(s+"end",function(t,e){var n=this;if(e){var r=e.headers.get("content-length");null!==r&&(n.rxSize=r),o.emit(s+"done",[null,e],n)}else o.emit(s+"done",[t],n)}))},{}],8:[function(t,e,n){var r=t("ee").get("history"),o=t(26)(r);e.exports=r;var i=window.history&&window.history.constructor&&window.history.constructor.prototype,a=window.history;i&&i.pushState&&i.replaceState&&(a=i),o.inPlace(a,["pushState","replaceState"],"-")},{}],9:[function(t,e,n){function r(t){function e(){c.emit("jsonp-end",[],p),t.removeEventListener("load",e,!1),t.removeEventListener("error",n,!1)}function n(){c.emit("jsonp-error",[],p),c.emit("jsonp-end",[],p),t.removeEventListener("load",e,!1),t.removeEventListener("error",n,!1)}var r=t&&"string"==typeof t.nodeName&&"script"===t.nodeName.toLowerCase();if(r){var o="function"==typeof t.addEventListener;if(o){var a=i(t.src);if(a){var u=s(a),d="function"==typeof u.parent[u.key];if(d){var p={};f.inPlace(u.parent,[u.key],"cb-",p),t.addEventListener("load",e,!1),t.addEventListener("error",n,!1),c.emit("new-jsonp",[t.src],p)}}}}}function o(){return"addEventListener"in window}function i(t){var e=t.match(u);return e?e[1]:null}function a(t,e){var n=t.match(p),r=n[1],o=n[3];return o?a(o,e[r]):e[r]}function s(t){var e=t.match(d);return e&&e.length>=3?{key:e[2],parent:a(e[1],window)}:{key:t,parent:window}}var c=t("ee").get("jsonp"),f=t(26)(c);if(e.exports=c,o()){var u=/[?&](?:callback|cb)=([^&#]+)/,d=/(.*)\.([^.]+)/,p=/^(\w+)(\.|$)(.*)$/,l=["appendChild","insertBefore","replaceChild"];Node&&Node.prototype&&Node.prototype.appendChild?f.inPlace(Node.prototype,l,"dom-"):(f.inPlace(HTMLElement.prototype,l,"dom-"),f.inPlace(HTMLHeadElement.prototype,l,"dom-"),f.inPlace(HTMLBodyElement.prototype,l,"dom-")),c.on("dom-start",function(t){r(t[0])})}},{}],10:[function(t,e,n){var r=t("ee").get("mutation"),o=t(26)(r),i=NREUM.o.MO;e.exports=r,i&&(window.MutationObserver=function(t){return this instanceof i?new i(o(t,"fn-")):i.apply(this,arguments)},MutationObserver.prototype=i.prototype)},{}],11:[function(t,e,n){function r(t){var e=a.context(),n=s(t,"executor-",e),r=new f(n);return a.context(r).getCtx=function(){return e},a.emit("new-promise",[r,e],e),r}function o(t,e){return e}var i=t(26),a=t("ee").get("promise"),s=i(a),c=t(23),f=NREUM.o.PR;e.exports=a,f&&(window.Promise=r,["all","race"].forEach(function(t){var e=f[t];f[t]=function(n){function r(t){return function(){a.emit("propagate",[null,!o],i),o=o||!t}}var o=!1;c(n,function(e,n){Promise.resolve(n).then(r("all"===t),r(!1))});var i=e.apply(f,arguments),s=f.resolve(i);return s}}),["resolve","reject"].forEach(function(t){var e=f[t];f[t]=function(t){var n=e.apply(f,arguments);return t!==n&&a.emit("propagate",[t,!0],n),n}}),f.prototype["catch"]=function(t){return this.then(null,t)},f.prototype=Object.create(f.prototype,{constructor:{value:r}}),c(Object.getOwnPropertyNames(f),function(t,e){try{r[e]=f[e]}catch(n){}}),a.on("executor-start",function(t){t[0]=s(t[0],"resolve-",this),t[1]=s(t[1],"resolve-",this)}),a.on("executor-err",function(t,e,n){t[1](n)}),s.inPlace(f.prototype,["then"],"then-",o),a.on("then-start",function(t,e){this.promise=e,t[0]=s(t[0],"cb-",this),t[1]=s(t[1],"cb-",this)}),a.on("then-end",function(t,e,n){this.nextPromise=n;var r=this.promise;a.emit("propagate",[r,!0],n)}),a.on("cb-end",function(t,e,n){a.emit("propagate",[n,!0],this.nextPromise)}),a.on("propagate",function(t,e,n){this.getCtx&&!e||(this.getCtx=function(){if(t instanceof Promise)var e=a.context(t);return e&&e.getCtx?e.getCtx():this})}),r.toString=function(){return""+f})},{}],12:[function(t,e,n){var r=t("ee").get("raf"),o=t(26)(r),i="equestAnimationFrame";e.exports=r,o.inPlace(window,["r"+i,"mozR"+i,"webkitR"+i,"msR"+i],"raf-"),r.on("raf-start",function(t){t[0]=o(t[0],"fn-")})},{}],13:[function(t,e,n){function r(t,e,n){t[0]=a(t[0],"fn-",null,n)}function o(t,e,n){this.method=n,this.timerDuration=isNaN(t[1])?0:+t[1],t[0]=a(t[0],"fn-",this,n)}var i=t("ee").get("timer"),a=t(26)(i),s="setTimeout",c="setInterval",f="clearTimeout",u="-start",d="-";e.exports=i,a.inPlace(window,[s,"setImmediate"],s+d),a.inPlace(window,[c],c+d),a.inPlace(window,[f,"clearImmediate"],f+d),i.on(c+u,r),i.on(s+u,o)},{}],14:[function(t,e,n){function r(t,e){d.inPlace(e,["onreadystatechange"],"fn-",s)}function o(){var t=this,e=u.context(t);t.readyState>3&&!e.resolved&&(e.resolved=!0,u.emit("xhr-resolved",[],t)),d.inPlace(t,y,"fn-",s)}function i(t){x.push(t),h&&(b?b.then(a):v?v(a):(E=-E,R.data=E))}function a(){for(var t=0;t<x.length;t++)r([],x[t]);x.length&&(x=[])}function s(t,e){return e}function c(t,e){for(var n in t)e[n]=t[n];return e}t(6);var f=t("ee"),u=f.get("xhr"),d=t(26)(u),p=NREUM.o,l=p.XHR,h=p.MO,m=p.PR,v=p.SI,w="readystatechange",y=["onload","onerror","onabort","onloadstart","onloadend","onprogress","ontimeout"],x=[];e.exports=u;var g=window.XMLHttpRequest=function(t){var e=new l(t);try{u.emit("new-xhr",[e],e),e.addEventListener(w,o,!1)}catch(n){try{u.emit("internal-error",[n])}catch(r){}}return e};if(c(l,g),g.prototype=l.prototype,d.inPlace(g.prototype,["open","send"],"-xhr-",s),u.on("send-xhr-start",function(t,e){r(t,e),i(e)}),u.on("open-xhr-start",r),h){var b=m&&m.resolve();if(!v&&!m){var E=1,R=document.createTextNode(E);new h(a).observe(R,{characterData:!0})}}else f.on("fn-end",function(t){t[0]&&t[0].type===w||a()})},{}],15:[function(t,e,n){function r(){var t=window.NREUM,e=t.info.accountID||null,n=t.info.agentID||null,r=t.info.trustKey||null,i="btoa"in window&&"function"==typeof window.btoa;if(!e||!n||!i)return null;var a={v:[0,1],d:{ty:"Browser",ac:e,ap:n,id:o.generateCatId(),tr:o.generateCatId(),ti:Date.now()}};return r&&e!==r&&(a.d.tk=r),btoa(JSON.stringify(a))}var o=t(21);e.exports={generateTraceHeader:r}},{}],16:[function(t,e,n){function r(t){var e=this.params,n=this.metrics;if(!this.ended){this.ended=!0;for(var r=0;r<l;r++)t.removeEventListener(p[r],this.listener,!1);e.aborted||(n.duration=s.now()-this.startTime,this.loadCaptureCalled||4!==t.readyState?null==e.status&&(e.status=0):a(this,t),n.cbTime=this.cbTime,d.emit("xhr-done",[t],t),c("xhr",[e,n,this.startTime]))}}function o(t,e){var n=t.responseType;if("json"===n&&null!==e)return e;var r="arraybuffer"===n||"blob"===n||"json"===n?t.response:t.responseText;return v(r)}function i(t,e){var n=f(e),r=t.params;r.host=n.hostname+":"+n.port,r.pathname=n.pathname,t.sameOrigin=n.sameOrigin}function a(t,e){t.params.status=e.status;var n=o(e,t.lastSize);if(n&&(t.metrics.rxSize=n),t.sameOrigin){var r=e.getResponseHeader("X-NewRelic-App-Data");r&&(t.params.cat=r.split(", ").pop())}t.loadCaptureCalled=!0}var s=t("loader");if(s.xhrWrappable){var c=t("handle"),f=t(17),u=t(15).generateTraceHeader,d=t("ee"),p=["load","error","abort","timeout"],l=p.length,h=t("id"),m=t(20),v=t(19),w=window.XMLHttpRequest;s.features.xhr=!0,t(14),d.on("new-xhr",function(t){var e=this;e.totalCbs=0,e.called=0,e.cbTime=0,e.end=r,e.ended=!1,e.xhrGuids={},e.lastSize=null,e.loadCaptureCalled=!1,t.addEventListener("load",function(n){a(e,t)},!1),m&&(m>34||m<10)||window.opera||t.addEventListener("progress",function(t){e.lastSize=t.loaded},!1)}),d.on("open-xhr-start",function(t){this.params={method:t[0]},i(this,t[1]),this.metrics={}}),d.on("open-xhr-end",function(t,e){"loader_config"in NREUM&&"xpid"in NREUM.loader_config&&this.sameOrigin&&e.setRequestHeader("X-NewRelic-ID",NREUM.loader_config.xpid);var n=!1;if("init"in NREUM&&"distributed_tracing"in NREUM.init&&(n=!!NREUM.init.distributed_tracing.enabled),n&&this.sameOrigin){var r=u();r&&e.setRequestHeader("newrelic",r)}}),d.on("send-xhr-start",function(t,e){var n=this.metrics,r=t[0],o=this;if(n&&r){var i=v(r);i&&(n.txSize=i)}this.startTime=s.now(),this.listener=function(t){try{"abort"!==t.type||o.loadCaptureCalled||(o.params.aborted=!0),("load"!==t.type||o.called===o.totalCbs&&(o.onloadCalled||"function"!=typeof e.onload))&&o.end(e)}catch(n){try{d.emit("internal-error",[n])}catch(r){}}};for(var a=0;a<l;a++)e.addEventListener(p[a],this.listener,!1)}),d.on("xhr-cb-time",function(t,e,n){this.cbTime+=t,e?this.onloadCalled=!0:this.called+=1,this.called!==this.totalCbs||!this.onloadCalled&&"function"==typeof n.onload||this.end(n)}),d.on("xhr-load-added",function(t,e){var n=""+h(t)+!!e;this.xhrGuids&&!this.xhrGuids[n]&&(this.xhrGuids[n]=!0,this.totalCbs+=1)}),d.on("xhr-load-removed",function(t,e){var n=""+h(t)+!!e;this.xhrGuids&&this.xhrGuids[n]&&(delete this.xhrGuids[n],this.totalCbs-=1)}),d.on("addEventListener-end",function(t,e){e instanceof w&&"load"===t[0]&&d.emit("xhr-load-added",[t[1],t[2]],e)}),d.on("removeEventListener-end",function(t,e){e instanceof w&&"load"===t[0]&&d.emit("xhr-load-removed",[t[1],t[2]],e)}),d.on("fn-start",function(t,e,n){e instanceof w&&("onload"===n&&(this.onload=!0),("load"===(t[0]&&t[0].type)||this.onload)&&(this.xhrCbStart=s.now()))}),d.on("fn-end",function(t,e){this.xhrCbStart&&d.emit("xhr-cb-time",[s.now()-this.xhrCbStart,this.onload,e],e)})}},{}],17:[function(t,e,n){e.exports=function(t){var e=document.createElement("a"),n=window.location,r={};e.href=t,r.port=e.port;var o=e.href.split("://");!r.port&&o[1]&&(r.port=o[1].split("/")[0].split("@").pop().split(":")[1]),r.port&&"0"!==r.port||(r.port="https"===o[0]?"443":"80"),r.hostname=e.hostname||n.hostname,r.pathname=e.pathname,r.protocol=o[0],"/"!==r.pathname.charAt(0)&&(r.pathname="/"+r.pathname);var i=!e.protocol||":"===e.protocol||e.protocol===n.protocol,a=e.hostname===document.domain&&e.port===n.port;return r.sameOrigin=i&&(!e.hostname||a),r}},{}],18:[function(t,e,n){function r(){}function o(t,e,n){return function(){return i(t,[f.now()].concat(s(arguments)),e?null:this,n),e?void 0:this}}var i=t("handle"),a=t(23),s=t(24),c=t("ee").get("tracer"),f=t("loader"),u=NREUM;"undefined"==typeof window.newrelic&&(newrelic=u);var d=["setPageViewName","setCustomAttribute","setErrorHandler","finished","addToTrace","inlineHit","addRelease"],p="api-",l=p+"ixn-";a(d,function(t,e){u[e]=o(p+e,!0,"api")}),u.addPageAction=o(p+"addPageAction",!0),u.setCurrentRouteName=o(p+"routeName",!0),e.exports=newrelic,u.interaction=function(){return(new r).get()};var h=r.prototype={createTracer:function(t,e){var n={},r=this,o="function"==typeof e;return i(l+"tracer",[f.now(),t,n],r),function(){if(c.emit((o?"":"no-")+"fn-start",[f.now(),r,o],n),o)try{return e.apply(this,arguments)}catch(t){throw c.emit("fn-err",[arguments,this,t],n),t}finally{c.emit("fn-end",[f.now()],n)}}}};a("actionText,setName,setAttribute,save,ignore,onEnd,getContext,end,get".split(","),function(t,e){h[e]=o(l+e)}),newrelic.noticeError=function(t,e){"string"==typeof t&&(t=new Error(t)),i("err",[t,f.now(),!1,e])}},{}],19:[function(t,e,n){e.exports=function(t){if("string"==typeof t&&t.length)return t.length;if("object"==typeof t){if("undefined"!=typeof ArrayBuffer&&t instanceof ArrayBuffer&&t.byteLength)return t.byteLength;if("undefined"!=typeof Blob&&t instanceof Blob&&t.size)return t.size;if(!("undefined"!=typeof FormData&&t instanceof FormData))try{return JSON.stringify(t).length}catch(e){return}}}},{}],20:[function(t,e,n){var r=0,o=navigator.userAgent.match(/Firefox[\/\s](\d+\.\d+)/);o&&(r=+o[1]),e.exports=r},{}],21:[function(t,e,n){function r(){function t(){return e?15&e[n++]:16*Math.random()|0}var e=null,n=0,r=window.crypto||window.msCrypto;r&&r.getRandomValues&&(e=r.getRandomValues(new Uint8Array(31)));for(var o,i="xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx",a="",s=0;s<i.length;s++)o=i[s],"x"===o?a+=t().toString(16):"y"===o?(o=3&t()|8,a+=o.toString(16)):a+=o;return a}function o(){function t(){return e?15&e[n++]:16*Math.random()|0}var e=null,n=0,r=window.crypto||window.msCrypto;r&&r.getRandomValues&&Uint8Array&&(e=r.getRandomValues(new Uint8Array(31)));for(var o=[],i=0;i<16;i++)o.push(t().toString(16));return o.join("")}e.exports={generateUuid:r,generateCatId:o}},{}],22:[function(t,e,n){function r(t,e){if(!o)return!1;if(t!==o)return!1;if(!e)return!0;if(!i)return!1;for(var n=i.split("."),r=e.split("."),a=0;a<r.length;a++)if(r[a]!==n[a])return!1;return!0}var o=null,i=null,a=/Version\/(\S+)\s+Safari/;if(navigator.userAgent){var s=navigator.userAgent,c=s.match(a);c&&s.indexOf("Chrome")===-1&&s.indexOf("Chromium")===-1&&(o="Safari",i=c[1])}e.exports={agent:o,version:i,match:r}},{}],23:[function(t,e,n){function r(t,e){var n=[],r="",i=0;for(r in t)o.call(t,r)&&(n[i]=e(r,t[r]),i+=1);return n}var o=Object.prototype.hasOwnProperty;e.exports=r},{}],24:[function(t,e,n){function r(t,e,n){e||(e=0),"undefined"==typeof n&&(n=t?t.length:0);for(var r=-1,o=n-e||0,i=Array(o<0?0:o);++r<o;)i[r]=t[e+r];return i}e.exports=r},{}],25:[function(t,e,n){e.exports={exists:"undefined"!=typeof window.performance&&window.performance.timing&&"undefined"!=typeof window.performance.timing.navigationStart}},{}],26:[function(t,e,n){function r(t){return!(t&&t instanceof Function&&t.apply&&!t[a])}var o=t("ee"),i=t(24),a="nr@original",s=Object.prototype.hasOwnProperty,c=!1;e.exports=function(t,e){function n(t,e,n,o){function nrWrapper(){var r,a,s,c;try{a=this,r=i(arguments),s="function"==typeof n?n(r,a):n||{}}catch(f){p([f,"",[r,a,o],s])}u(e+"start",[r,a,o],s);try{return c=t.apply(a,r)}catch(d){throw u(e+"err",[r,a,d],s),d}finally{u(e+"end",[r,a,c],s)}}return r(t)?t:(e||(e=""),nrWrapper[a]=t,d(t,nrWrapper),nrWrapper)}function f(t,e,o,i){o||(o="");var a,s,c,f="-"===o.charAt(0);for(c=0;c<e.length;c++)s=e[c],a=t[s],r(a)||(t[s]=n(a,f?s+o:o,i,s))}function u(n,r,o){if(!c||e){var i=c;c=!0;try{t.emit(n,r,o,e)}catch(a){p([a,n,r,o])}c=i}}function d(t,e){if(Object.defineProperty&&Object.keys)try{var n=Object.keys(t);return n.forEach(function(n){Object.defineProperty(e,n,{get:function(){return t[n]},set:function(e){return t[n]=e,e}})}),e}catch(r){p([r])}for(var o in t)s.call(t,o)&&(e[o]=t[o]);return e}function p(e){try{t.emit("internal-error",e)}catch(n){}}return t||(t=o),n.inPlace=f,n.flag=a,n}},{}],ee:[function(t,e,n){function r(){}function o(t){function e(t){return t&&t instanceof r?t:t?c(t,s,i):i()}function n(n,r,o,i){if(!p.aborted||i){t&&t(n,r,o);for(var a=e(o),s=m(n),c=s.length,f=0;f<c;f++)s[f].apply(a,r);var d=u[x[n]];return d&&d.push([g,n,r,a]),a}}function l(t,e){y[t]=m(t).concat(e)}function h(t,e){var n=y[t];if(n)for(var r=0;r<n.length;r++)n[r]===e&&n.splice(r,1)}function m(t){return y[t]||[]}function v(t){return d[t]=d[t]||o(n)}function w(t,e){f(t,function(t,n){e=e||"feature",x[n]=e,e in u||(u[e]=[])})}var y={},x={},g={on:l,addEventListener:l,removeEventListener:h,emit:n,get:v,listeners:m,context:e,buffer:w,abort:a,aborted:!1};return g}function i(){return new r}function a(){(u.api||u.feature)&&(p.aborted=!0,u=p.backlog={})}var s="nr@context",c=t("gos"),f=t(23),u={},d={},p=e.exports=o();p.backlog=u},{}],gos:[function(t,e,n){function r(t,e,n){if(o.call(t,e))return t[e];var r=n();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(t,e,{value:r,writable:!0,enumerable:!1}),r}catch(i){}return t[e]=r,r}var o=Object.prototype.hasOwnProperty;e.exports=r},{}],handle:[function(t,e,n){function r(t,e,n,r){o.buffer([t],r),o.emit(t,e,n)}var o=t("ee").get("handle");e.exports=r,r.ee=o},{}],id:[function(t,e,n){function r(t){var e=typeof t;return!t||"object"!==e&&"function"!==e?-1:t===window?0:a(t,i,function(){return o++})}var o=1,i="nr@id",a=t("gos");e.exports=r},{}],loader:[function(t,e,n){function r(){if(!E++){var t=b.info=NREUM.info,e=l.getElementsByTagName("script")[0];if(setTimeout(u.abort,3e4),!(t&&t.licenseKey&&t.applicationID&&e))return u.abort();f(x,function(e,n){t[e]||(t[e]=n)}),c("mark",["onload",a()+b.offset],null,"api");var n=l.createElement("script");n.src="https://"+t.agent,e.parentNode.insertBefore(n,e)}}function o(){"complete"===l.readyState&&i()}function i(){c("mark",["domContent",a()+b.offset],null,"api")}function a(){return R.exists&&performance.now?Math.round(performance.now()):(s=Math.max((new Date).getTime(),s))-b.offset}var s=(new Date).getTime(),c=t("handle"),f=t(23),u=t("ee"),d=t(22),p=window,l=p.document,h="addEventListener",m="attachEvent",v=p.XMLHttpRequest,w=v&&v.prototype;NREUM.o={ST:setTimeout,SI:p.setImmediate,CT:clearTimeout,XHR:v,REQ:p.Request,EV:p.Event,PR:p.Promise,MO:p.MutationObserver};var y=""+location,x={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-spa-1130.min.js"},g=v&&w&&w[h]&&!/CriOS/.test(navigator.userAgent),b=e.exports={offset:s,now:a,origin:y,features:{},xhrWrappable:g,userAgent:d};t(18),l[h]?(l[h]("DOMContentLoaded",i,!1),p[h]("load",r,!1)):(l[m]("onreadystatechange",o),p[m]("onload",r)),c("mark",["firstbyte",s],null,"api");var E=0,R=t(25)},{}]},{},["loader",2,16,5,3,4]);
+;NREUM.info={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",licenseKey:"4558326637",applicationID:"388202469",sa:1}
+</script>
+<script type="text/javascript">
+var variantValue = "";
+if (window.cmsPageVariant) {
+variantValue = window.cmsPageVariant;
+}
+else {
+variantValue = "no variant";
+}
+newrelic.setCustomAttribute('variant', variantValue);
+</script>
+<script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ld/ldclient.min" src="ldclient.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ld/ldclient-common.min" src="ldclient-common.js"></script></head>
+<body id="comparing-workflows" class="wac git tutorials comparing-workflows hoverable content-loaded">
+<div id="header">
+<div class="tutorial-sidebar is-active">
+<div class="_bumper"></div>
+<div class="_wrap">
+<ol>
+<div class="_group">
+<a href="https://www.atlassian.com/es/git/tutorials/learn-git-with-bitbucket-cloud" class="cms-link cms-link--text group-link">Aprende Git</a>
+<div class="_group-wrap">
+<a href="https://www.atlassian.com/es/git/tutorials/learn-git-with-bitbucket-cloud" class="cms-link cms-link--text tutorial-link">Aprende a usar Git con Bitbucket Cloud</a>
+<div class="_toc">
+<a href="https://www.atlassian.com/es/git/tutorials/learn-git-with-bitbucket-cloud#create-the-repository" class="cms-link cms-link--text section-link">Crea un repositorio de Git</a>
+<a href="https://www.atlassian.com/es/git/tutorials/learn-git-with-bitbucket-cloud#copy-and-add-files" class="cms-link cms-link--text section-link">Copia tu repositorio de Git y añade los archivos</a>
+<a href="https://www.atlassian.com/es/git/tutorials/learn-git-with-bitbucket-cloud#pull-changes" class="cms-link cms-link--text section-link">Incorpora cambios de tu repositorio de Git en Bitbucket Cloud</a>
+<a href="https://www.atlassian.com/es/git/tutorials/learn-git-with-bitbucket-cloud#git-branch-to-merge" class="cms-link cms-link--text section-link">Usa una rama de Git para fusionar un archivo</a>
+</div>
+</div>
+<div class="_group-wrap">
+<a href="https://www.atlassian.com/es/git/tutorials/learn-about-code-review-in-bitbucket-cloud" class="cms-link cms-link--text tutorial-link">Obtén información sobre la revisión del código en Bitbucket Cloud</a>
+<div class="_toc">
+<a href="https://www.atlassian.com/es/git/tutorials/learn-about-code-review-in-bitbucket-cloud#create-repository" class="cms-link cms-link--text section-link">Crea un repositorio y añade a un compañero de equipo</a>
+<a href="https://www.atlassian.com/es/git/tutorials/learn-about-code-review-in-bitbucket-cloud#clone-branch" class="cms-link cms-link--text section-link">Clona y haz un cambio en la nueva rama</a>
+<a href="https://www.atlassian.com/es/git/tutorials/learn-about-code-review-in-bitbucket-cloud#im-using-git" class="cms-link cms-link--text section-link">Si estás usando una línea de comandos</a>
+<a href="https://www.atlassian.com/es/git/tutorials/learn-about-code-review-in-bitbucket-cloud#im-using-sourcetree" class="cms-link cms-link--text section-link">Si estás usando Sourcetree</a>
+</div>
+</div>
+<div class="_group-wrap">
+<a href="https://www.atlassian.com/es/git/tutorials/learn-branching-with-bitbucket-cloud" class="cms-link cms-link--text tutorial-link">Aprende sobre ramas con Bitbucket Cloud</a>
+<div class="_toc">
+<a href="https://www.atlassian.com/es/git/tutorials/learn-branching-with-bitbucket-cloud#create-the-repository" class="cms-link cms-link--text section-link">Preparación</a>
+<a href="https://www.atlassian.com/es/git/tutorials/learn-branching-with-bitbucket-cloud#review-branching-workflow" class="cms-link cms-link--text section-link">Revisa el workflow de ramas</a>
+</div>
+</div>
+<div class="_group-wrap">
+<a href="https://www.atlassian.com/es/git/tutorials/learn-undoing-changes-with-bitbucket" class="cms-link cms-link--text tutorial-link">Aprende sobre cómo deshacer cambios con Bitbucket&nbsp;Cloud</a>
+<div class="_toc">
+<a href="https://www.atlassian.com/es/git/tutorials/learn-undoing-changes-with-bitbucket#git-status" class="cms-link cms-link--text section-link">git status</a>
+<a href="https://www.atlassian.com/es/git/tutorials/learn-undoing-changes-with-bitbucket#git-log" class="cms-link cms-link--text section-link">git log</a>
+<a href="https://www.atlassian.com/es/git/tutorials/learn-undoing-changes-with-bitbucket#git-reset" class="cms-link cms-link--text section-link">git reset</a>
+<a href="https://www.atlassian.com/es/git/tutorials/learn-undoing-changes-with-bitbucket#git-revert" class="cms-link cms-link--text section-link">git revert</a>
+</div>
+</div>
+</div>
+<div class="_group">
+<a href="https://www.atlassian.com/es/git/tutorials/what-is-version-control" class="cms-link cms-link--text group-link">Principiante</a>
+<div class="_group-wrap">
+<a href="https://www.atlassian.com/es/git/tutorials/what-is-version-control" class="cms-link cms-link--text tutorial-link">Qué es el control de versiones</a>
+<div class="_toc">
+<a href="https://www.atlassian.com/es/git/tutorials/what-is-version-control#benefits-of-version-control" class="cms-link cms-link--text section-link">Ventajas del control de versiones</a>
+</div>
+</div>
+<div class="_group-wrap">
+<a href="https://www.atlassian.com/es/git/tutorials/source-code-management" class="cms-link cms-link--text tutorial-link">Gestión del código fuente</a>
+</div>
+<div class="_group-wrap">
+<a href="https://www.atlassian.com/es/git/tutorials/what-is-git" class="cms-link cms-link--text tutorial-link">Qué es Git</a>
+<div class="_toc">
+<a href="https://www.atlassian.com/es/git/tutorials/what-is-git#performance" class="cms-link cms-link--text section-link">Rendimiento</a>
+<a href="https://www.atlassian.com/es/git/tutorials/what-is-git#security" class="cms-link cms-link--text section-link">Seguridad</a>
+<a href="https://www.atlassian.com/es/git/tutorials/what-is-git#flexibility" class="cms-link cms-link--text section-link">Flexibilidad</a>
+<a href="https://www.atlassian.com/es/git/tutorials/what-is-git#version-control-with-git" class="cms-link cms-link--text section-link">Control de versiones con Git</a>
+</div>
+</div>
+<div class="_group-wrap">
+<a href="https://www.atlassian.com/es/git/tutorials/why-git" class="cms-link cms-link--text tutorial-link">Por qué utilizar Git en tu organización</a>
+<div class="_toc">
+<a href="https://www.atlassian.com/es/git/tutorials/why-git#git-for-developers" class="cms-link cms-link--text section-link">Git para desarrolladores</a>
+<a href="https://www.atlassian.com/es/git/tutorials/why-git#git-for-marketing" class="cms-link cms-link--text section-link">Git para marketing</a>
+<a href="https://www.atlassian.com/es/git/tutorials/why-git#git-for-product-management" class="cms-link cms-link--text section-link">Git para gestión de productos</a>
+<a href="https://www.atlassian.com/es/git/tutorials/why-git#git-for-designers" class="cms-link cms-link--text section-link">Git para diseñadores</a>
+<a href="https://www.atlassian.com/es/git/tutorials/why-git#git-for-customer-support" class="cms-link cms-link--text section-link">Git para atención al cliente</a>
+<a href="https://www.atlassian.com/es/git/tutorials/why-git#git-for-human-resources" class="cms-link cms-link--text section-link">Git para recursos humanos</a>
+<a href="https://www.atlassian.com/es/git/tutorials/why-git#git-for-anyone-managing-budget" class="cms-link cms-link--text section-link">Git para gestores de presupuestos</a>
+</div>
+</div>
+<div class="_group-wrap">
+<a href="https://www.atlassian.com/es/git/tutorials/install-git" class="cms-link cms-link--text tutorial-link">Instalar Git</a>
+<div class="_toc">
+<a href="https://www.atlassian.com/es/git/tutorials/install-git#mac-os-x" class="cms-link cms-link--text section-link">Instalar Git en Mac OS X</a>
+<a href="https://www.atlassian.com/es/git/tutorials/install-git#windows" class="cms-link cms-link--text section-link">Instalar Git en Windows</a>
+<a href="https://www.atlassian.com/es/git/tutorials/install-git#linux" class="cms-link cms-link--text section-link">Instalar Git en Linux</a>
+</div>
+</div>
+<div class="_group-wrap">
+<a href="https://www.atlassian.com/es/git/tutorials/git-ssh" class="cms-link cms-link--text tutorial-link">Git SSH</a>
+</div>
+<div class="_group-wrap">
+<a href="https://www.atlassian.com/es/git/tutorials/export-git-archive" class="cms-link cms-link--text tutorial-link">Git archive</a>
+</div>
+<div class="_group-wrap">
+<a href="https://www.atlassian.com/es/git/tutorials/atlassian-git-cheatsheet" class="cms-link cms-link--text tutorial-link">Chuleta de Git</a>
+</div>
+</div>
+<div class="_group">
+<a href="https://www.atlassian.com/es/git/tutorials/setting-up-a-repository" class="cms-link cms-link--text group-link">Empieza ya</a>
+<div class="_group-wrap">
+<a href="https://www.atlassian.com/es/git/tutorials/setting-up-a-repository" class="cms-link cms-link--text tutorial-link">Configuración de un repositorio</a>
+<div class="_toc">
+<a href="https://www.atlassian.com/es/git/tutorials/setting-up-a-repository/git-init" class="cms-link cms-link--text section-link">git init</a>
+<a href="https://www.atlassian.com/es/git/tutorials/setting-up-a-repository/git-clone" class="cms-link cms-link--text section-link">git clone</a>
+<a href="https://www.atlassian.com/es/git/tutorials/setting-up-a-repository/git-config" class="cms-link cms-link--text section-link">git config</a>
+<a href="https://www.atlassian.com/es/git/tutorials/git-alias" class="cms-link cms-link--text section-link">Alias de Git</a>
+</div>
+</div>
+<div class="_group-wrap">
+<a href="https://www.atlassian.com/es/git/tutorials/saving-changes" class="cms-link cms-link--text tutorial-link">Guardar cambios</a>
+<div class="_toc">
+<a href="https://www.atlassian.com/es/git/tutorials/saving-changes" class="cms-link cms-link--text section-link">git add</a>
+<a href="https://www.atlassian.com/es/git/tutorials/saving-changes/git-commit" class="cms-link cms-link--text section-link">git commit</a>
+<a href="https://www.atlassian.com/es/git/tutorials/saving-changes/git-diff" class="cms-link cms-link--text section-link">git diff</a>
+<a href="https://www.atlassian.com/es/git/tutorials/saving-changes/git-stash" class="cms-link cms-link--text section-link">git stash</a>
+<a href="https://www.atlassian.com/es/git/tutorials/saving-changes/gitignore" class="cms-link cms-link--text section-link">.gitignore</a>
+</div>
+</div>
+<div class="_group-wrap">
+<a href="https://www.atlassian.com/es/git/tutorials/inspecting-a-repository" class="cms-link cms-link--text tutorial-link">Examen de un repositorio</a>
+<div class="_toc">
+<a href="https://www.atlassian.com/es/git/tutorials/inspecting-a-repository" class="cms-link cms-link--text section-link">git status</a>
+<a href="https://www.atlassian.com/es/git/tutorials/inspecting-a-repository/git-tag" class="cms-link cms-link--text section-link">git tag</a>
+<a href="https://www.atlassian.com/es/git/tutorials/inspecting-a-repository/git-blame" class="cms-link cms-link--text section-link">git blame</a>
+</div>
+</div>
+<div class="_group-wrap">
+<a href="https://www.atlassian.com/es/git/tutorials/undoing-changes" class="cms-link cms-link--text tutorial-link">Deshacer cambios</a>
+<div class="_toc">
+<a href="https://www.atlassian.com/es/git/tutorials/undoing-changes" class="cms-link cms-link--text section-link">git checkout</a>
+<a href="https://www.atlassian.com/es/git/tutorials/undoing-changes/git-clean" class="cms-link cms-link--text section-link">git clean</a>
+<a href="https://www.atlassian.com/es/git/tutorials/undoing-changes/git-revert" class="cms-link cms-link--text section-link">git revert</a>
+<a href="https://www.atlassian.com/es/git/tutorials/undoing-changes/git-reset" class="cms-link cms-link--text section-link">git reset</a>
+<a href="https://www.atlassian.com/es/git/tutorials/undoing-changes/git-rm" class="cms-link cms-link--text section-link">git rm</a>
+</div>
+</div>
+<div class="_group-wrap">
+<a href="https://www.atlassian.com/es/git/tutorials/rewriting-history" class="cms-link cms-link--text tutorial-link">Reescribir el historial</a>
+<div class="_toc">
+<a href="https://www.atlassian.com/es/git/tutorials/rewriting-history#git-commit--amend" class="cms-link cms-link--text section-link">git commit --amend</a>
+<a href="https://www.atlassian.com/es/git/tutorials/rewriting-history/git-rebase" class="cms-link cms-link--text section-link">git rebase</a>
+<a href="https://www.atlassian.com/es/git/tutorials/rewriting-history#git-rebase-i" class="cms-link cms-link--text section-link">git rebase -i</a>
+<a href="https://www.atlassian.com/es/git/tutorials/rewriting-history/git-reflog" class="cms-link cms-link--text section-link">git reflog</a>
+</div>
+</div>
+</div>
+<div class="_group">
+<a href="https://www.atlassian.com/es/git/tutorials/syncing" class="cms-link cms-link--text group-link">Colaboración</a>
+<div class="_group-wrap is-active">
+<a href="https://www.atlassian.com/es/git/tutorials/syncing" class="cms-link cms-link--text tutorial-link">Sincronización</a>
+<div class="_toc">
+<a href="https://www.atlassian.com/es/git/tutorials/syncing" class="cms-link cms-link--text section-link">git remote</a>
+<a href="https://www.atlassian.com/es/git/tutorials/syncing/git-fetch" class="cms-link cms-link--text section-link">git fetch</a>
+<a href="https://www.atlassian.com/es/git/tutorials/syncing/git-push" class="cms-link cms-link--text section-link">git push</a>
+<a href="https://www.atlassian.com/es/git/tutorials/syncing/git-pull" class="cms-link cms-link--text section-link">git pull</a>
+</div>
+</div>
+<div class="_group-wrap is-active">
+<a href="https://www.atlassian.com/es/git/tutorials/making-a-pull-request" class="cms-link cms-link--text tutorial-link">Realizar una pull request</a>
+<div class="_toc">
+<a href="https://www.atlassian.com/es/git/tutorials/making-a-pull-request#how-it-works" class="cms-link cms-link--text section-link">Funcionamiento</a>
+<a href="https://www.atlassian.com/es/git/tutorials/making-a-pull-request#example" class="cms-link cms-link--text section-link">Ejemplo</a>
+<a href="https://www.atlassian.com/es/git/tutorials/making-a-pull-request#where-to-go" class="cms-link cms-link--text section-link">Hacia dónde ir</a>
+</div>
+</div>
+<div class="_group-wrap is-active">
+<a href="https://www.atlassian.com/es/git/tutorials/using-branches" class="cms-link cms-link--text tutorial-link">Usar ramas</a>
+<div class="_toc">
+<a href="https://www.atlassian.com/es/git/tutorials/using-branches" class="cms-link cms-link--text section-link">rama de git</a>
+<a href="https://www.atlassian.com/es/git/tutorials/using-branches/git-checkout" class="cms-link cms-link--text section-link">git checkout</a>
+<a href="https://www.atlassian.com/es/git/tutorials/using-branches/git-merge" class="cms-link cms-link--text section-link">Git merge</a>
+<a href="https://www.atlassian.com/es/git/tutorials/using-branches/merge-conflicts" class="cms-link cms-link--text section-link">Fusiona los conflictos</a>
+<a href="https://www.atlassian.com/es/git/tutorials/using-branches/merge-strategy" class="cms-link cms-link--text section-link">Combinación de estrategias</a>
+</div>
+</div>
+<div class="_group-wrap is-active">
+<a href="https://www.atlassian.com/es/git/tutorials/comparing-workflows" class="cms-link cms-link--text tutorial-link active">Comparar workflows</a>
+<div class="_toc is-active">
+<a href="https://www.atlassian.com/es/git/tutorials/comparing-workflows#centralized-workflow" class="cms-link cms-link--text section-link">Flujo de trabajo centralizado</a>
+<a href="https://www.atlassian.com/es/git/tutorials/comparing-workflows/feature-branch-workflow" class="cms-link cms-link--text section-link">Flujo de trabajo de rama de función</a>
+<a href="https://www.atlassian.com/es/git/tutorials/comparing-workflows/gitflow-workflow" class="cms-link cms-link--text section-link">Flujo de trabajo de Gitflow</a>
+<a href="https://www.atlassian.com/es/git/tutorials/comparing-workflows/forking-workflow" class="cms-link cms-link--text section-link">Flujo de trabajo de bifurcación</a>
+</div>
+</div>
+</div>
+<div class="_group">
+<a href="https://www.atlassian.com/es/git/tutorials/svn-to-git-prepping-your-team-migration" class="cms-link cms-link--text group-link">Migración a Git</a>
+<div class="_group-wrap">
+<a href="https://www.atlassian.com/es/git/tutorials/svn-to-git-prepping-your-team-migration" class="cms-link cms-link--text tutorial-link">De SVN a Git: prepárate para la migración</a>
+<div class="_toc">
+<a href="https://www.atlassian.com/es/git/tutorials/svn-to-git-prepping-your-team-migration#for-administrators" class="cms-link cms-link--text section-link">Para administradores</a>
+<a href="https://www.atlassian.com/es/git/tutorials/svn-to-git-prepping-your-team-migration#basic-git-commands" class="cms-link cms-link--text section-link">Comandos básicos de Git</a>
+<a href="https://www.atlassian.com/es/git/tutorials/svn-to-git-prepping-your-team-migration#git-migration-tools" class="cms-link cms-link--text section-link">Herramientas de migración de Git</a>
+<a href="https://www.atlassian.com/es/git/tutorials/svn-to-git-prepping-your-team-migration#for-developers" class="cms-link cms-link--text section-link">Para desarrolladores</a>
+</div>
+</div>
+<div class="_group-wrap">
+<a href="https://www.atlassian.com/es/git/tutorials/migrating-overview" class="cms-link cms-link--text tutorial-link">Migrar a Git desde SVN</a>
+</div>
+<div class="_group-wrap">
+<a href="https://www.atlassian.com/es/git/tutorials/migrating-prepare" class="cms-link cms-link--text tutorial-link">Preparar</a>
+</div>
+<div class="_group-wrap">
+<a href="https://www.atlassian.com/es/git/tutorials/migrating-convert" class="cms-link cms-link--text tutorial-link">Convertir</a>
+</div>
+<div class="_group-wrap">
+<a href="https://www.atlassian.com/es/git/tutorials/migrating-synchronize" class="cms-link cms-link--text tutorial-link">Sincronizar</a>
+</div>
+<div class="_group-wrap">
+<a href="https://www.atlassian.com/es/git/tutorials/migrating-share" class="cms-link cms-link--text tutorial-link">Compartir</a>
+</div>
+<div class="_group-wrap">
+<a href="https://www.atlassian.com/es/git/tutorials/migrating-migrate" class="cms-link cms-link--text tutorial-link">Migrar</a>
+</div>
+<div class="_group-wrap">
+<a href="https://www.atlassian.com/es/git/tutorials/perforce-git" class="cms-link cms-link--text tutorial-link">De Perforce a Git: por qué dar el paso</a>
+</div>
+<div class="_group-wrap">
+<a href="https://www.atlassian.com/es/git/tutorials/perforce-git-migration" class="cms-link cms-link--text tutorial-link">Migrar de Perforce a Git</a>
+</div>
+<div class="_group-wrap">
+<a href="https://www.atlassian.com/es/git/tutorials/git-move-repository" class="cms-link cms-link--text tutorial-link">Cómo mover un repositorio de Git con historial</a>
+</div>
+</div>
+<div class="_group">
+<a href="https://www.atlassian.com/es/git/tutorials/advanced-overview" class="cms-link cms-link--text group-link">Consejos avanzados</a>
+<div class="_group-wrap">
+<a href="https://www.atlassian.com/es/git/tutorials/advanced-overview" class="cms-link cms-link--text tutorial-link">Tutoriales de Git avanzados</a>
+</div>
+<div class="_group-wrap">
+<a href="https://www.atlassian.com/es/git/tutorials/merging-vs-rebasing" class="cms-link cms-link--text tutorial-link">La fusión frente a la reorganización</a>
+<div class="_toc">
+<a href="https://www.atlassian.com/es/git/tutorials/merging-vs-rebasing#conceptual-overview" class="cms-link cms-link--text section-link">Resumen de conceptos</a>
+<a href="https://www.atlassian.com/es/git/tutorials/merging-vs-rebasing#the-golden-rule-of-rebasing" class="cms-link cms-link--text section-link">La regla de oro de la reorganización</a>
+<a href="https://www.atlassian.com/es/git/tutorials/merging-vs-rebasing#workflow-walkthrough" class="cms-link cms-link--text section-link">Guía del flujo de trabajo</a>
+<a href="https://www.atlassian.com/es/git/tutorials/merging-vs-rebasing#summary" class="cms-link cms-link--text section-link">Resumen</a>
+</div>
+</div>
+<div class="_group-wrap">
+<a href="https://www.atlassian.com/es/git/tutorials/resetting-checking-out-and-reverting" class="cms-link cms-link--text tutorial-link">Restablecimiento, extracción y reversión</a>
+</div>
+<div class="_group-wrap">
+<a href="https://www.atlassian.com/es/git/tutorials/git-log" class="cms-link cms-link--text tutorial-link">Git log avanzado</a>
+<div class="_toc">
+<a href="https://www.atlassian.com/es/git/tutorials/git-log#formatting-log-output" class="cms-link cms-link--text section-link">Formato de la salida del registro</a>
+<a href="https://www.atlassian.com/es/git/tutorials/git-log#filtering-the-commit-history" class="cms-link cms-link--text section-link">Filtrado del historial de confirmaciones</a>
+<a href="https://www.atlassian.com/es/git/tutorials/git-log#summary" class="cms-link cms-link--text section-link">Resumen</a>
+</div>
+</div>
+<div class="_group-wrap">
+<a href="https://www.atlassian.com/es/git/tutorials/git-hooks" class="cms-link cms-link--text tutorial-link">Puntos de enganche Git</a>
+<div class="_toc">
+<a href="https://www.atlassian.com/es/git/tutorials/git-hooks#conceptual-overview" class="cms-link cms-link--text section-link">Resumen de conceptos</a>
+<a href="https://www.atlassian.com/es/git/tutorials/git-hooks#local-hooks" class="cms-link cms-link--text section-link">Hooks locales</a>
+<a href="https://www.atlassian.com/es/git/tutorials/git-hooks#server-side-hooks" class="cms-link cms-link--text section-link">Hooks de servidor</a>
+<a href="https://www.atlassian.com/es/git/tutorials/git-hooks#summary" class="cms-link cms-link--text section-link">Resumen</a>
+</div>
+</div>
+<div class="_group-wrap">
+<a href="https://www.atlassian.com/es/git/tutorials/refs-and-the-reflog" class="cms-link cms-link--text tutorial-link">Referencias y registro de referencias</a>
+<div class="_toc">
+<a href="https://www.atlassian.com/es/git/tutorials/refs-and-the-reflog#hashes" class="cms-link cms-link--text section-link">Hashes</a>
+<a href="https://www.atlassian.com/es/git/tutorials/refs-and-the-reflog#refs" class="cms-link cms-link--text section-link">Referencias</a>
+<a href="https://www.atlassian.com/es/git/tutorials/refs-and-the-reflog#packed-refs" class="cms-link cms-link--text section-link">Referencias empaquetadas</a>
+<a href="https://www.atlassian.com/es/git/tutorials/refs-and-the-reflog#special-refs" class="cms-link cms-link--text section-link">Referencias especiales</a>
+<a href="https://www.atlassian.com/es/git/tutorials/refs-and-the-reflog#refspecs" class="cms-link cms-link--text section-link">Referencias de especificaciones</a>
+<a href="https://www.atlassian.com/es/git/tutorials/refs-and-the-reflog#relative-refs" class="cms-link cms-link--text section-link">Referencias relativas</a>
+<a href="https://www.atlassian.com/es/git/tutorials/refs-and-the-reflog#the-reflog" class="cms-link cms-link--text section-link">El comando reflog</a>
+<a href="https://www.atlassian.com/es/git/tutorials/refs-and-the-reflog#summary" class="cms-link cms-link--text section-link">Resumen</a>
+</div>
+</div>
+<div class="_group-wrap">
+<a href="https://www.atlassian.com/es/git/tutorials/git-submodule" class="cms-link cms-link--text tutorial-link">Git submodules</a>
+</div>
+<div class="_group-wrap">
+<a href="https://www.atlassian.com/es/git/tutorials/git-subtree" class="cms-link cms-link--text tutorial-link">Tutoriales de Git avanzados</a>
+</div>
+<div class="_group-wrap">
+<a href="https://www.atlassian.com/es/git/tutorials/big-repositories" class="cms-link cms-link--text tutorial-link">Tutoriales de Git avanzados</a>
+</div>
+<div class="_group-wrap">
+<a href="https://www.atlassian.com/es/git/tutorials/git-lfs" class="cms-link cms-link--text tutorial-link">Git LFS</a>
+</div>
+<div class="_group-wrap">
+<a href="https://www.atlassian.com/es/git/tutorials/git-gc" class="cms-link cms-link--text tutorial-link">Git gc</a>
+</div>
+<div class="_group-wrap">
+<a href="https://www.atlassian.com/es/git/tutorials/git-prune" class="cms-link cms-link--text tutorial-link">Git prune</a>
+</div>
+<div class="_group-wrap">
+<a href="https://www.atlassian.com/es/git/tutorials/git-bash" class="cms-link cms-link--text tutorial-link">Git Bash</a>
+</div>
+<div class="_group-wrap">
+<a href="https://www.atlassian.com/es/git/tutorials/dotfiles" class="cms-link cms-link--text tutorial-link">Cómo almacenar archivos ocultos</a>
+</div>
+<div class="_group-wrap">
+<a href="https://www.atlassian.com/es/git/tutorials/cherry-pick" class="cms-link cms-link--text tutorial-link">Git Cherry Pick</a>
+</div>
+<div class="_group-wrap">
+<a href="https://www.atlassian.com/es/git/tutorials/gitk" class="cms-link cms-link--text tutorial-link">GitK</a>
+</div>
+<div class="_group-wrap">
+<a href="https://www.atlassian.com/es/git/tutorials/git-show" class="cms-link cms-link--text tutorial-link">Git-show</a>
+</div>
+</div>
+</ol>
+</div>
+</div>
+<div class="hamburger">
+<div class="_layer -top"></div>
+<div class="_layer -mid"></div>
+<div class="_layer -bottom"></div>
+</div>
+<div class="primary-nav">
+<div class="_wrapper">
+<ul class="_nav-list">
+<div>
+<li>
+<a href="https://www.atlassian.com/es/git" class="cms-link cms-link--text _nav-item -home">Inicio</a>
+</li>
+</div>
+<div>
+<li class="tutorials-nav" id="tutorials-nav-mobile">
+<h4 class="_nav-item -tutorials">Tutorials</h4>
+<div class="_sublist">  <ol>        <li class="_group">      <h5>Aprende Git</h5>      <ol class="_group-wrap">                <li>          <a href="https://www.atlassian.com/es/git/tutorials/learn-git-with-bitbucket-cloud">Aprende a usar Git con Bitbucket Cloud</a>        </li>                <li>          <a href="https://www.atlassian.com/es/git/tutorials/learn-about-code-review-in-bitbucket-cloud">Obtén información sobre la revisión del código en Bitbucket Cloud</a>        </li>                <li>          <a href="https://www.atlassian.com/es/git/tutorials/learn-branching-with-bitbucket-cloud">Aprende sobre ramas con Bitbucket Cloud</a>        </li>                <li>          <a href="https://www.atlassian.com/es/git/tutorials/learn-undoing-changes-with-bitbucket">Aprende sobre cómo deshacer cambios con Bitbucket&nbsp;Cloud</a>        </li>              </ol>    </li>        <li class="_group">      <h5>Principiante</h5>      <ol class="_group-wrap">                <li>          <a href="https://www.atlassian.com/es/git/tutorials/what-is-version-control">Qué es el control de versiones</a>        </li>                <li>          <a href="https://www.atlassian.com/es/git/tutorials/source-code-management">Gestión del código fuente</a>        </li>                <li>          <a href="https://www.atlassian.com/es/git/tutorials/what-is-git">Qué es Git</a>        </li>                <li>          <a href="https://www.atlassian.com/es/git/tutorials/why-git">Por qué utilizar Git en tu organización</a>        </li>                <li>          <a href="https://www.atlassian.com/es/git/tutorials/install-git">Instalar Git</a>        </li>                <li>          <a href="https://www.atlassian.com/es/git/tutorials/git-ssh">Git SSH</a>        </li>                <li>          <a href="https://www.atlassian.com/es/git/tutorials/export-git-archive">Git archive</a>        </li>                <li>          <a href="https://www.atlassian.com/es/git/tutorials/atlassian-git-cheatsheet">Chuleta de Git</a>        </li>              </ol>    </li>        <li class="_group">      <h5>Empieza ya</h5>      <ol class="_group-wrap">                <li>          <a href="https://www.atlassian.com/es/git/tutorials/setting-up-a-repository">Configuración de un repositorio</a>        </li>                <li>          <a href="https://www.atlassian.com/es/git/tutorials/saving-changes">Guardar cambios</a>        </li>                <li>          <a href="https://www.atlassian.com/es/git/tutorials/inspecting-a-repository">Examen de un repositorio</a>        </li>                <li>          <a href="https://www.atlassian.com/es/git/tutorials/undoing-changes">Deshacer cambios</a>        </li>                <li>          <a href="https://www.atlassian.com/es/git/tutorials/rewriting-history">Reescribir el historial</a>        </li>              </ol>    </li>        <li class="_group">      <h5>Colaboración</h5>      <ol class="_group-wrap">                <li>          <a href="https://www.atlassian.com/es/git/tutorials/syncing">Sincronización</a>        </li>                <li>          <a href="https://www.atlassian.com/es/git/tutorials/making-a-pull-request">Realizar una pull request</a>        </li>                <li>          <a href="https://www.atlassian.com/es/git/tutorials/using-branches">Usar ramas</a>        </li>                <li>          <a href="https://www.atlassian.com/es/git/tutorials/comparing-workflows">Comparar workflows</a>        </li>              </ol>    </li>        <li class="_group">      <h5>Migración a Git</h5>      <ol class="_group-wrap">                <li>          <a href="https://www.atlassian.com/es/git/tutorials/svn-to-git-prepping-your-team-migration">De SVN a Git: prepárate para la migración</a>        </li>                <li>          <a href="https://www.atlassian.com/es/git/tutorials/migrating-overview">Migrar a Git desde SVN</a>        </li>                <li>          <a href="https://www.atlassian.com/es/git/tutorials/migrating-prepare">Preparar</a>        </li>                <li>          <a href="https://www.atlassian.com/es/git/tutorials/migrating-convert">Convertir</a>        </li>                <li>          <a href="https://www.atlassian.com/es/git/tutorials/migrating-synchronize">Sincronizar</a>        </li>                <li>          <a href="https://www.atlassian.com/es/git/tutorials/migrating-share">Compartir</a>        </li>                <li>          <a href="https://www.atlassian.com/es/git/tutorials/migrating-migrate">Migrar</a>        </li>                <li>          <a href="https://www.atlassian.com/es/git/tutorials/perforce-git">De Perforce a Git: por qué dar el paso</a>        </li>                <li>          <a href="https://www.atlassian.com/es/git/tutorials/perforce-git-migration">Migrar de Perforce a Git</a>        </li>                <li>          <a href="https://www.atlassian.com/es/git/tutorials/git-move-repository">Cómo mover un repositorio de Git con historial</a>        </li>              </ol>    </li>        <li class="_group">      <h5>Consejos avanzados</h5>      <ol class="_group-wrap">                <li>          <a href="https://www.atlassian.com/es/git/tutorials/advanced-overview">Tutoriales de Git avanzados</a>        </li>                <li>          <a href="https://www.atlassian.com/es/git/tutorials/merging-vs-rebasing">La fusión frente a la reorganización</a>        </li>                <li>          <a href="https://www.atlassian.com/es/git/tutorials/resetting-checking-out-and-reverting">Restablecimiento, extracción y reversión</a>        </li>                <li>          <a href="https://www.atlassian.com/es/git/tutorials/git-log">Git log avanzado</a>        </li>                <li>          <a href="https://www.atlassian.com/es/git/tutorials/git-hooks">Puntos de enganche Git</a>        </li>                <li>          <a href="https://www.atlassian.com/es/git/tutorials/refs-and-the-reflog">Referencias y registro de referencias</a>        </li>                <li>          <a href="https://www.atlassian.com/es/git/tutorials/git-submodule">Git submodules</a>        </li>                <li>          <a href="https://www.atlassian.com/es/git/tutorials/git-subtree">Tutoriales de Git avanzados</a>        </li>                <li>          <a href="https://www.atlassian.com/es/git/tutorials/big-repositories">Tutoriales de Git avanzados</a>        </li>                <li>          <a href="https://www.atlassian.com/es/git/tutorials/git-lfs">Git LFS</a>        </li>                <li>          <a href="https://www.atlassian.com/es/git/tutorials/git-gc">Git gc</a>        </li>                <li>          <a href="https://www.atlassian.com/es/git/tutorials/git-prune">Git prune</a>        </li>                <li>          <a href="https://www.atlassian.com/es/git/tutorials/git-bash">Git Bash</a>        </li>                <li>          <a href="https://www.atlassian.com/es/git/tutorials/dotfiles">Cómo almacenar archivos ocultos</a>        </li>                <li>          <a href="https://www.atlassian.com/es/git/tutorials/cherry-pick">Git Cherry Pick</a>        </li>                <li>          <a href="https://www.atlassian.com/es/git/tutorials/gitk">GitK</a>        </li>                <li>          <a href="https://www.atlassian.com/es/git/tutorials/git-show">Git-show</a>        </li>              </ol>    </li>      </ol>  </div>
+</li>
+<li>
+<a href="https://www.atlassian.com/es/git/tutorials" class="cms-link cms-link--text _nav-item -tutorials">Tutoriales</a>
+</li>
+</div>
+<div>
+<li>
+<a href="https://www.atlassian.com/es/git/articles" class="cms-link cms-link--text _nav-item -articles">Artículos</a>
+</li>
+</div>
+<div>
+<li>
+<a href="https://www.atlassian.com/es/git/glossary" class="cms-link cms-link--text _nav-item -glossary">Glosario</a>
+</li>
+</div>
+</ul>
+</div>
+</div>
+<div class="topbar is-tutorial">
+<div class="_header -is-tutorial">
+<a href="https://www.atlassian.com/es/git/tutorials" class="active">Tutorials</a>
+</div>
+</div>
+<form class="newsletter">
+<input class="is-empty _input" placeholder="Enter Your Email For Git News" type="email">
+<button type="submit" class="_status icon-email-submit">Submit</button>
+</form>
+<a href="#footer" class="button green-hollow secondary newsletter-cta">Inscribirse</a>
+<a href="https://www.atlassian.com/es/git/search" class="search-button search-open ">
+<span class="_link icon-search">Search</span>
+</a>
+<a href="https://www.atlassian.com/es/git" class="search-button search-close -in-page hidden">
+<span class="_link icon-search-close -close">Search</span>
+</a>
+</div>
+<div class="page-wrap is-active -gray-bg tutorial-detail">
+<div id="content" class="_content">
+<div class="tutorial-hero">
+<div class="g-column g-12-12 text-center">
+<img data-src="https://wac-cdn.atlassian.com/dam/jcr:25d06843-2468-4e00-8ae7-11d4164f8995/hero.svg?cdnVersion=817" alt="Git workflow | Comparing workflows" class="lozad">
+<h1>Comparar workflows</h1>
+</div></div>
+<div class="g-row">
+<div class="g-column g-12-12 g-centered">
+<p>&nbsp;</p>
+<p>Un flujo de trabajo de Git es una fórmula o una recomendación acerca 
+del uso de Git para realizar trabajo de forma uniforme y productiva. Los
+ flujos de trabajo de Git animan a los usuarios a sacar partido a Git de
+ forma eficaz y estable. Git ofrece a los usuarios una amplia 
+flexibilidad de gestión de cambios. Dado que Git se centra en la 
+flexibilidad, no existe un proceso estandarizado acerca de cómo 
+interactuar con Git. Cuando se trabaja con un equipo en un proyecto 
+gestionado por Git, es importante asegurarse de que el equipo está de 
+acuerdo con cómo se va a aplicar el flujo de cambios Para garantizar que
+ todo el equipo se encuentra en sintonía, se debe desarrollar o 
+seleccionar un flujo de trabajo de Git.&nbsp;Hay varios flujos de 
+trabajo de Git publicados que pueden ser adecuados para tu equipo. Aquí 
+hablaremos sobre algunas de estas opciones de flujo de trabajo.</p>
+<p>La gama de flujos de trabajos posibles hace que resulte complicado 
+saber por dónde hay que empezar a implementar Git en el lugar de 
+trabajo. En esta página proporcionamos un punto de partida, ya que 
+ofrecemos un análisis de los flujos de trabajo más habituales entre los 
+equipos de software.</p>
+<p>Ten en cuenta que estos flujos de trabajo se han diseñado a modo 
+orientativo, en lugar de para usarlos como reglas concretas. Queremos 
+mostrarte las posibilidades, de forma que puedas combinar y mezclar 
+aspectos de distintos flujos de trabajo que respondan a tus necesidades.</p>
+<h2>¿Qué es un flujo de trabajo de Git exitoso? </h2>
+<p>Cuando evalúas un flujo de trabajo para tu equipo, lo más importante 
+es que tengas en cuenta la cultura de tu equipo. Quieres que el flujo de
+ trabajo mejore la eficacia de tu equipo, no que sea una carga que 
+limite la productividad. Estas son algunas cosas que debes tener en 
+cuenta a la hora de evaluar un flujo de trabajo de Git:</p>
+<ul>
+<li>¿Este flujo de trabajo se escala con el tamaño del equipo?</li>
+<li>¿Es fácil deshacer los errores y los fallos con este flujo de trabajo?</li>
+<li>¿Este flujo de trabajo impone excesos cognitivos sobre el equipo?</li>
+</ul>
+<h2>Flujo de trabajo centralizado</h2>
+<img data-src="https://wac-cdn.atlassian.com/dam/jcr:0869c664-5bc1-4bf2-bef0-12f3814b3187/01.svg?cdnVersion=817" alt="git workflow | Central and local repositories" class="lozad">
+<p>El flujo de trabajo centralizado es un flujo de trabajo de Git 
+estupendo para equipos que están realizando la migración desde SVN. Al 
+igual que Subversion, el flujo de trabajo centralizado usa un 
+repositorio central como punto de entrada de todos los cambios al 
+proyecto. En lugar de <code>trunk</code>, la rama de desarrollo predeterminada se llama <code>master</code>, y todos los cambios se confirman en dicha rama. Este flujo de trabajo no requiere más ramas que <code>master</code>.</p>
+<p>La migración a un sistema de control de versiones distribuido puede 
+parecer una tarea complicada, pero no tienes que cambiar tu flujo de 
+trabajo existente para sacarle partido a Git. Tu equipo puede 
+desarrollar proyectos del mismo modo en el que lo hacían con Subversion.</p>
+<p>No obstante, usar Git para impulsar tu flujo de trabajo de desarrollo
+ presenta algunas ventajas en comparación con SVN. En primer lugar, le 
+brinda a cada desarrollador su propia copia local del proyecto completo.
+ Este entorno aislado deja que cada desarrollador trabaje de forma 
+independiente a todos los demás cambios de un proyecto; pueden añadir 
+confirmaciones a su repositorio local y olvidarse por completo de los 
+desarrollos posteriores hasta que los necesiten.</p>
+<p>En segundo lugar, te proporciona acceso al sólido modelo de fusión y 
+creación de ramas de Git. Al contrario que SVN, las ramas de Git se han 
+diseñado para constituir un mecanismo de seguridad de integración de 
+código y uso compartido de cambios entre repositorios. El flujo de 
+trabajo centralizado es similar a otros flujos de trabajo en lo que 
+respecta al uso de un repositorio remoto alojado en servidor al que los 
+desarrolladores pueden realizar envíos e incorporar cambios. En 
+comparación con otros flujos de trabajo, el flujo de trabajo 
+centralizado no tiene solicitudes de incorporación de cambios o patrones
+ de bifurcación. Un flujo de trabajo centralizado suele ser más adecuado
+ para equipos que migran desde SVN a Git y otros de tamaño reducido.</p>
+<h2>Funcionamiento</h2>
+<p>Los desarrolladores empiezan por clonar el repositorio central. En 
+sus propias copias locales del proyecto, editan archivos y confirman 
+cambios como lo harían en SVN; no obstante, estas nuevas confirmaciones 
+se almacenan de forma local, completamente aisladas del repositorio 
+central. Esto permite que los desarrolladores aplacen la sincronización 
+con los niveles superiores hasta que realicen una pausa.</p>
+<p>Para publicar cambios en el proyecto oficial, los desarrolladores "envían" su rama <code>master</code> local al repositorio central. Este proceso es equivalente a <code>svn commit</code>, excepto porque añade todas las confirmaciones locales que no se han enviado todavía a una rama <code>master</code>.</p>
+<h3>Incialización del repositorio central</h3>
+<img data-src="https://wac-cdn.atlassian.com/dam/jcr:f03a0fbd-a880-477f-aa32-33340383ce07/02%20(3).svg?cdnVersion=817" alt="Git Workflow: Initialize Central Bare Repository" class="lozad">
+<p>En primer lugar, hace falta crear el repositorio central en un 
+servidor. Si se trata de un proyecto nuevo, puedes inicializar un 
+repositorio vacío. Si no es así, tendrás que importar un repositorio Git
+ o SVN existente.</p>
+<p>Los repositorios centrales deben ser siempre bare (vacíos, es decir, 
+sin ningún directorio en funcionamiento), que se pueden crear de esta 
+forma:</p>
+<p><code>ssh user@host git init --bare /path/to/repo.git</code></p>
+<p>Asegúrate de utilizar un nombre de usuario de SSH válido en <code>user</code>, el dominio o la dirección IP de tu servidor en <code>host</code> y la ubicación en la que quieres almacenar el repositorio en <code>/path/to/repo.git</code>. Ten en cuenta que la extensión <code>.git</code> se sueñe añadir al nombre del repositorio para indicar que es un repositorio bare (vacío).</p>
+<h3>Repositorios centrales alojados</h3>
+<p>Los repositorios centrales se suelen crear mediante servicios de alojamiento de Git de terceros, como <a href="https://bitbucket.org/product">Bitbucket Cloud</a> o <a href="https://bitbucket.org/product/enterprise">Bitbucket Server</a>.
+ El servicio de alojamiento realiza el proceso de inicializar un 
+repositorio bare (vacío) que se ha explicado anteriormente en tu lugar. A
+ continuación, dicho servicio de alojamiento proporcionará una dirección
+ para acceder al repositorio central desde tu repositorio local.</p>
+<h3>Clonación del repositorio central</h3>
+<p>El siguiente desarrollador crea una copia local de todo el proyecto. Esto se consigue mediante el comando <code><a href="https://www.atlassian.com/git/tutorials/setting-up-a-repository/git-clone">git clone</a></code>:</p>
+<p><code>git clone ssh://user@host/path/to/repo.git</code></p>
+<p>Cuando clonas un repositorio, Git añade automáticamente un atajo de teclado llamado <code>origin</code> que apunta al repositorio principal, ya que asume que querrás interactuar con él más adelante.&nbsp;</p>
+<h3>Aplicación de cambios y confirmaciones</h3>
+<p>Cuando el repositorio se clona de forma local, el desarrollador puede
+ aplicar cambios mediante el proceso de confirmación estándar de Git: 
+editar, preparar y confirmar. Si no te has familiarizado con el entorno 
+de ensayo, debes saber que consiste en una forma de preparar una 
+confirmación sin tener que incluir todos los cambios del directorio en 
+funcionamiento. Esto te permite crear confirmaciones con un enfoque muy 
+claro, incluso si has aplicado muchos cambios locales.</p>
+<pre><code class="hljs dockerfile">git status <span class="hljs-comment"># Muestra el estado del repositorio</span>
+git <span class="hljs-keyword">add</span><span class="bash"> &lt;some-file&gt; <span class="hljs-comment"># Prepara un archivo</span>
+</span>git commit <span class="hljs-comment"># Confirma un archivo&lt;/some-file&gt;</span></code></pre>
+<p>Recuerda que, como estos comandos crean confirmaciones locales, John 
+puede repetir el proceso todas las veces que quiera sin tener que 
+preocuparse por lo que esté sucediendo en el repositorio central. Esta 
+característica puede resultar muy útil para funciones de gran tamaño que
+ se tienen que desglosar en bloques más sencillos y reducidos.</p>
+<h3>Envío de nuevas confirmaciones al repositorio central</h3>
+<p>Una vez que se hayan aplicado cambios nuevos al repositorio local, se
+ deberán enviar estos cambios para compartirlos con otros 
+desarrolladores del proyecto.</p>
+<pre><code class="hljs maxima">git <span class="hljs-built_in">push</span> <span class="hljs-built_in">origin</span> master</code></pre>
+<p>Este comando enviará los nuevos cambios confirmados al repositorio 
+central. Cuando envías cambios al repositorio central, es posible que 
+las actualizaciones enviadas anteriormente por otros desarrolladores 
+contengan código que entra en conflicto con las actualizaciones que tú 
+quieres enviar. Git mostrará un mensaje en el que se indica este 
+problema. En esta situación, tendrá que ejecutarse el comando <code>git pull</code> en primer lugar. Esta situación de conflicto se explica en profundidad en la sección siguiente.</p>
+<h3>Gestión de conflictos</h3>
+<p>El repositorio central representa el proyecto oficial, por lo que su 
+historial de confirmación se debe tratar como algo sagrado e inmutable. 
+Si las confirmaciones locales de un desarrollador difieren de las del 
+repositorio central, Git rechazará el envío de cambios porque estos 
+sobrescribirían las confirmaciones oficiales.</p>
+<img data-src="https://wac-cdn.atlassian.com/dam/jcr:d06191e3-994e-453a-8ea9-a2e93374e53e/03%20(4).svg?cdnVersion=817" alt="Git Workflows: Managing conflicts" class="lozad">
+<p>Antes de que el desarrollador pueda publicar una función, tiene que 
+buscar y actualizar las confirmaciones centrales y reorganizar los 
+cambios a partir de ellas. Es como decir "quiero añadir mis cambios a lo
+ que los demás ya han hecho". El resultado es un historial perfectamente
+ lineal, como las de los flujos de trabajo de SVN tradicionales.</p>
+<p>Si los cambios locales entran en conflicto directo con las 
+confirmaciones en niveles superiores, Git pondrá en pausa el proceso de 
+modificación de bases y te dará la oportunidad de resolver los 
+conflictos de forma manual. Lo bueno de Git es que usa los mismos 
+comandos, <code>git status</code> y <code>git add</code>, tanto para 
+generar confirmaciones como para resolver conflictos de fusión. Esto 
+hace que a los nuevos desarrolladores les resulte sencillo gestionar sus
+ propias fusiones. Además, si tienen problemas, Git hace que sea muy 
+fácil abandonar por completo la reorganización y volver a intentarlo (o 
+ir a pedir ayuda).</p>
+<h2>Ejemplo</h2>
+<p>Veamos un ejemplo general sobre cómo un equipo que suele ser pequeño 
+puede colaborar mediante este flujo de trabajo. Hemos visto como dos 
+desarrolladores, John y Mary, pueden trabajar en funciones separadas y 
+compartir sus contribuciones mediante un repositorio centralizado.</p>
+<h3>John trabaja en su función</h3>
+<img data-src="https://wac-cdn.atlassian.com/dam/jcr:76bfc199-100a-4ef7-b9cf-86179ea5507c/06%20(2).svg?cdnVersion=817" alt="Git Workflows: Edit Stage Commit Feature Process" class="lozad">
+<p>En este repositorio local, John puede desarrollar funciones mediante 
+el proceso de confirmación estándar de Git: editar, preparar y 
+confirmar.</p>
+<p>Recuerda que, como estos comandos crean confirmaciones locales, John 
+puede repetir este proceso tantas veces como desee sin tener que 
+preocuparse por lo que está pasando en el repositorio central.</p>
+<h3>Mary trabaja en su función</h3>
+<img data-src="https://wac-cdn.atlassian.com/dam/jcr:a0aa8d1b-11a4-4aa4-a3a9-4f83f9be9a67/07.svg?cdnVersion=817" alt="Git Workflows: Edit Stage Commit Feature" class="lozad">
+<p>Mientras tanto, Mary trabaja en su propia función y en su propio 
+repositorio local con el mismo proceso de cambio, preparación y 
+confirmación. Al igual que a John, no le importa lo que esté sucediendo 
+en el repositorio central y, <em>por supuesto</em>, tampoco le importa lo que John está haciendo en su repositorio local, ya que todos los repositorios locales son <em>privados</em>.</p>
+<h3>John publica su función</h3>
+<img data-src="https://wac-cdn.atlassian.com/dam/jcr:6e5dc66d-b041-4013-b321-b1908fecfdbd/08.svg?cdnVersion=817" alt="Git Workflows: Publish Feature" class="lozad">
+<p>Una vez que John ha completado su función, debe publicar sus 
+confirmaciones locales en el repositorio central, de forma que otros 
+miembros del equipo puedan acceder a ellas. Puede hacerlo con el comando
+ <code><a href="https://www.atlassian.com/git/tutorials/syncing/git-push">git push</a></code> de este modo:</p>
+<pre><code class="hljs maxima">git <span class="hljs-built_in">push</span> <span class="hljs-built_in">origin</span> master</code></pre>
+<p>Recuerda que <code>origin</code> es la conexión remota al repositorio central que Git creó cuando John lo clonó. El argumento <code>master</code> le indica a Git que intente hacer que la rama <code>master</code> de <code>origin</code> tenga el mismo aspecto que su rama <code>master</code>
+ local. Como el repositorio central no se ha actualizado desde que John 
+lo clonó, esta acción no creará ningún conflicto y el envío se realizará
+ según lo previsto.</p>
+<h3>Mary intenta publicar su función</h3>
+<img data-src="https://wac-cdn.atlassian.com/dam/jcr:52e2347e-b8e0-49ab-9530-5d1e9129198e/09.svg?cdnVersion=817" alt="Git Workflows: Push Command Error" class="lozad">
+<p>Veamos lo que pasa cuando Mary intenta enviar su función después de 
+que John haya publicado con éxito sus cambios en el repositorio central.
+ Puede usar el mismo comando push:</p>
+<pre><code class="hljs maxima">git <span class="hljs-built_in">push</span> <span class="hljs-built_in">origin</span> master</code></pre>
+<p>No obstante, como su historial local es distinto que el del 
+repositorio, git rechazará la solicitud con un mensaje de error algo 
+extenso:</p>
+<pre><code class="hljs applescript"><span class="hljs-keyword">error</span>: failed <span class="hljs-keyword">to</span> push <span class="hljs-keyword">some</span> refs <span class="hljs-keyword">to</span> '/path/<span class="hljs-keyword">to</span>/repo.git'
+hint: Updates were rejected because <span class="hljs-keyword">the</span> tip <span class="hljs-keyword">of</span> your current branch <span class="hljs-keyword">is</span> <span class="hljs-keyword">behind</span>
+hint: <span class="hljs-keyword">its</span> remote counterpart. Merge <span class="hljs-keyword">the</span> remote changes (e.g. 'git pull')
+hint: <span class="hljs-keyword">before</span> pushing again.
+hint: See <span class="hljs-keyword">the</span> 'Note <span class="hljs-keyword">about</span> fast-forwards' <span class="hljs-keyword">in</span> 'git push <span class="hljs-comment">--help' for details.</span></code></pre>
+<p>Así se evita que Mary sobrescriba las confirmaciones oficiales. Tiene
+ que incorporar los cambios de las actualizaciones de John a su 
+repositorio, integrarlos con sus cambios locales y, a continuación, 
+volver a intentarlo.</p>
+<h3>Mary realiza una reorganización a partir de las confirmaciones de John</h3>
+<img data-src="https://wac-cdn.atlassian.com/dam/jcr:25edd772-a30a-475a-a6ca-d1055ae61737/10.svg?cdnVersion=817" alt="Git Workflows: Git Pull Rebase" class="lozad">
+<p>Mary puede usar el comando <code><a href="https://www.atlassian.com/git/tutorials/syncing/git-pull">git pull</a></code> para incorporar cambios del nivel superior a su repositorio. Este comando es parecido a <code>svn update</code>,
+ ya que incorpora los cambios de todo el historial de confirmación del 
+nivel superior al repositorio local de Mary e intenta integrarlos con 
+sus confirmaciones locales:</p>
+<pre><code class="hljs ada">git pull <span class="hljs-comment">--rebase origin master</span></code></pre>
+<p>La opción <code>--rebase</code> le indica a Git que transfiera todas las confirmaciones de Mary al extremo de la rama <code>master</code> después de sincronizarlos con el repositorio central, como se muestra a continuación:</p>
+<img data-src="https://wac-cdn.atlassian.com/dam/jcr:5165668f-b62d-4417-95e6-fde8ed97ec60/11.svg?cdnVersion=817" alt="Git workflows: Rebasing to Master" class="lozad">
+<p>La incorporación de cambios seguirá funcionando si se te olvida esta 
+opción, pero es posible que tengas que realizar una confirmación de 
+fusión cada vez que alguien tenga que realizar una sincronización con el
+ repositorio central. Para este flujo de trabajo, siempre es mejor 
+reorganizar en lugar de generar una confirmación de fusión.</p>
+<h3>Mary soluciona un conflicto de fusión</h3>
+<img data-src="https://wac-cdn.atlassian.com/dam/jcr:eaad29a3-6d94-4916-8a2c-3dea71aea4c2/12.svg?cdnVersion=817" alt="Git Workflows: Rebasing on Commits" class="lozad">
+<p>Modifica las bases de los trabajos mediante la transferencia de cada confirmación local a la rama <code>master</code>
+ actualizada de una en una. De este modo, descubrirás los conflictos de 
+fusión de cada confirmación, en lugar de tener que resolverlos todos con
+ una confirmación de fusión masiva. Además, esto hace que tus 
+confirmaciones mantengan un enfoque lo más claro posible, y produce un 
+historial del proyecto limpio. También hace que resulte mucho más 
+sencillo descubrir qué errores se han introducido y, si fuera necesario,
+ revertir cambios con un impacto mínimo sobre el proyecto.</p>
+<p>Si Mary y John trabajan en funciones que no están relacionadas, es 
+poco probable que el proceso de reorganización genere conflictos. No 
+obstante, si así fuera, Git pausará la reorganización en la confirmación
+ actual y mostrará el siguiente mensaje, además de algunas instrucciones
+ importantes:</p>
+<pre><code class="hljs sql">CONFLICT (content): <span class="hljs-keyword">Merge</span> conflict <span class="hljs-keyword">in</span> &lt;<span class="hljs-keyword">some</span>-<span class="hljs-keyword">file</span>&gt;</code></pre>
+<img data-src="https://wac-cdn.atlassian.com/dam/jcr:adf8c8e3-4287-4ec1-acf7-2a052d61d03f/13.svg?cdnVersion=817" alt="Git workflows: Conflict Resolution" class="lozad">
+<p>Lo bueno de Git es que <em>cualquiera</em> puede resolver sus propios conflictos de fusión. En nuestro ejemplo, Mary solo tiene que ejecutar un comando <code><a href="https://www.atlassian.com/git/tutorials/inspecting-a-repository/git-status">git status</a></code> para ver dónde está el problema. Los archivos en conflicto se mostrarán en la sección Rutas no fusionadas:</p>
+<pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> Rutas no fusionadas:</span>
+<span class="hljs-meta">#</span><span class="bash"> (usa <span class="hljs-string">"git reset HEAD &lt;some-file&gt;..."</span> para deshacer la reparación)<span class="hljs-comment">#</span></span>
+(usa "git add/rm &lt;some-file&gt;..." según corresponda para indicar la resolución)
+<span class="hljs-meta">#</span><span class="bash"></span>
+<span class="hljs-meta">#</span><span class="bash"> ambos modificados: &lt;some-file&gt;</span></code></pre>
+<p>A continuación, editará los archivos como considere. Una vez que esté
+ contenta con el resultado, podrá preparar los archivos según el método 
+habitual y dejar que <code><a href="https://www.atlassian.com/git/tutorials/rewriting-history/git-rebase">git rebase</a></code> haga el resto:</p>
+<pre><code class="hljs applescript">git add &lt;<span class="hljs-keyword">some</span>-<span class="hljs-built_in">file</span>&gt;
+git rebase <span class="hljs-comment">--continue</span></code></pre>
+<p>Y esto es todo lo que hay que hacer. Git continuará con la siguiente 
+confirmación y repetirá el proceso con cualquier otra confirmación que 
+genere conflictos.</p>
+<p>Si llegas a este punto y te das cuenta de que no tienes ni idea de lo
+ que está pasando, no entres en pánico. Solo tienes que ejecutar el 
+siguiente comando y volverás al punto de inicio:</p>
+<pre><code class="hljs ada">git rebase <span class="hljs-comment">--abort</span></code></pre>
+<h3>Mary publica correctamente su función</h3>
+<img data-src="https://wac-cdn.atlassian.com/dam/jcr:de2dabdd-542f-4f64-9be4-870abff06f60/14.svg?cdnVersion=817" alt="Git Workflows: Synchronize Central Repo" class="lozad">
+<p>Después de terminar con la sincronización del repositorio central, Mary podrá publicar los cambios correctamente:</p>
+<pre><code class="hljs maxima">git <span class="hljs-built_in">push</span> <span class="hljs-built_in">origin</span> master</code></pre>
+<h3>Hacia dónde ir</h3>
+<p>Como puedes ver, es posible replicar un entorno de desarrollo de 
+Subversion tradicional con solo unos comandos de Git. Este método es 
+perfecto para los equipos que están migrando de SVN, pero no le sacan 
+partido a la naturaleza distribuida de Git.</p>
+<p>El flujo de trabajo centralizado es estupendo para equipos pequeños. 
+El proceso de resolución de conflictos explicado anteriormente puede 
+provocar un cuello de botella conforme tu equipo escala su tamaño. Si tu
+ equipo está contento con el flujo de trabajo centralizado, pero quiere 
+perfeccionar la colaboración, merece la pena analizar las ventajas del <a href="https://www.atlassian.com/git/tutorials/comparing-workflows/feature-branch-workflow">flujo de trabajo de rama de función</a>.
+ Al dedicar una rama aislada a cada función, es posible iniciar 
+conversaciones en profundidad acerca de nuevas adiciones antes de 
+integrarlas en el proyecto oficial.</p>
+<h2 id="feature-branch-workflow">Otros flujos de trabajo habituales</h2>
+<p>El flujo de trabajo centralizado consiste en un bloque de 
+construcción de otros flujos de trabajo de Git. Los flujos de trabajo de
+ Git más populares cuentan con una especie de repositorio centralizado 
+del que los desarrolladores pueden incorporar cambios y al que pueden 
+enviar los suyos. A continuación, hablaremos brevemente sobre otros 
+flujos de trabajo de Git populares. Estos flujos de trabajo ampliados 
+ofrecen patrones más específicos en lo que respecta a la gestión de 
+ramas para el desarrollo de funciones, las correcciones inmediatas y la 
+publicación.</p>
+<h2>Ramas de funcionalidades</h2>
+<p>La creación de ramas de funciones es una extensión lógica del flujo de trabajo centralizado. La idea principal que subyace al <a href="http://www.atlassian.com/git/tutorials/comparing-workflows/feature-branch-workflow">flujo de trabajo de rama de función</a> es que el desarrollo de una función debe llevarse a cabo en una rama especializada, en lugar de en una rama <code>master</code>.
+ Este aislamiento permite que varios desarrolladores trabajen en una 
+función concreta sin perturbar el contenido del código base principal. 
+También implica que la rama <code>master</code> no debe contener en ningún caso código erróneo, lo que supone una gran ventaja para los entornos de integración continua.&nbsp;</p>
+<h2>Flujo de trabajo de Gitflow</h2>
+<p>El <a href="http://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow">flujo de trabajo de Gitflow</a> se publicó por primera vez en una entrada de blog de 2010 muy reconocida de&nbsp;<a href="http://nvie.com/posts/a-successful-git-branching-model/">Vincent Driessen en nvie</a>.&nbsp;El
+ flujo de trabajo de Gitflow define un modelo de creación de ramas 
+estricto diseñado con la publicación del proyecto como fundamento. Este 
+flujo de trabajo no añade ningún concepto o comando nuevo, solo los que 
+se necesitan para el flujo de trabajo de rama de función. En su lugar, 
+asigna funciones muy específicas a las distintas ramas y define cómo y 
+cuándo deben realizarse las interacciones.&nbsp;</p>
+<h2>Flujo de trabajo de bifurcación</h2>
+<p>El <a href="http://www.atlassian.com/git/tutorials/comparing-workflows/forking-workflow">flujo de trabajo de bifurcación</a>
+ es muy diferente de los otros flujos de trabajo que se muestran en este
+ tutorial. En lugar de usar un único repositorio en servidor para que 
+actúe como código base central, le proporciona a cada desarrollador un 
+repositorio en servidor. Esto quiere decir que cada contribuyente tiene 
+dos repositorios de Git: uno local y privado y otro público y en 
+servidor.&nbsp;</p>
+<h2>Directrices</h2>
+<p>No existe un flujo de trabajo de Git universal. Como se ha indicado 
+anteriormente, es muy importante desarrollar un flujo de trabajo de Git 
+que suponga una mejora productiva para tu equipo. Además de la cultura 
+del equipo, el flujo de trabajo debe ampliar la cultura empresarial. Las
+ funciones de Git, como las ramas y las etiquetas, deben complementar la
+ planificación de publicación de tu empresa. Si tu equipo usa&nbsp;<a href="https://www.atlassian.com/software/jira">software de gestión de proyectos con seguimiento de tareas</a>,&nbsp;puede
+ que quieras usar ramas que se correspondan con las tareas en curso. 
+Aquí presentamos algunas directrices que se deben tener en cuenta a la 
+hora de decantarse por un flujo de trabajo:</p>
+<h3>Ramas transitorias</h3>
+<p>Cuanto más tiempo se desarrolle una rama de forma independiente a la 
+rama de producción, mayor será el riesgo de que surjan conflictos de 
+fusión y retos de implementación. Las ramas transitorias proporcionan 
+fusiones e implementaciones más limpias.</p>
+<h3>Minimización y simplificación de reversiones</h3>
+<p>Es importante disponer de un flujo de trabajo que ayuda de forma 
+proactiva a evitar fusiones que tendrán que revertirse. Un ejemplo de 
+esto son los flujos de trabajo que realizan pruebas de una rama antes de
+ fusionarla con la rama <code>master</code>. No obstante, se producen 
+accidentes. Con esto en mente, conviene tener un flujo de trabajo que 
+permita realizar reversiones sencillas que no interrumpan el flujo de 
+otros miembros del equipo.</p>
+<h3>Cumplimiento de una planificación de publicación</h3>
+<p>Un flujo de trabajo debe complementar tu ciclo de publicación de 
+desarrollo de software empresarial. Si tienes pensado realizar varias 
+publicaciones al día, querrás que tu rama <code>master</code> se 
+mantenga estable. Si tu planificación de publicación es mucho menos 
+frecuente, ten en cuenta que puedes usar etiquetas de Git para asignar 
+una rama a una versión.</p>
+<h2>Resumen</h2>
+<p>En este documento, hemos hablado de los flujos de trabajo de Git, 
+hemos analizado en profundidad el flujo de trabajo centralizado con 
+ejemplos prácticos y hemos ampliado esta información con la de otros 
+flujos de trabajo especializados. Estas son algunas de las ideas 
+fundamentales de este documento:</p>
+<ul>
+<li>No existe un flujo de trabajo de Git universal</li>
+<li>Un flujo de trabajo debe ser sencillo y mejorar la productividad de tu equipo</li>
+<li>Tus requisitos empresariales deben servir para dar forma al flujo de trabajo de Git</li>
+</ul>
+<p>Para obtener más información sobre el flujo de trabajo de Git, echa un vistazo a nuestro desglose completo del&nbsp;<a href="https://www.atlassian.com/git/tutorials/comparing-workflows/feature-branch-workflow">flujo de trabajo de rama de función</a>.</p>
+</div></div>
+<div id="related-post-sidebar" class="related-post attached">
+<div class="related-post--text">
+<p>¿Listo para aprender a usar Git?</p>
+<p>Prueba este tutorial interactivo.</p>
+</div>
+<a href="https://www.atlassian.com/es/git/tutorials/learn-git-with-bitbucket-cloud" class="button green-solid standard related-post--link">Comienza ahora</a>
+</div>
+<div class="_footer">
+<a href="https://www.atlassian.com/es/git/tutorials/comparing-workflows/feature-branch-workflow" class="cms-link cms-link--text"><div class="g-column g-6-12 g-centered">
+<div class="_hero">
+<img data-src="https://wac-cdn.atlassian.com/dam/jcr:c2e5ef87-1dde-4a5f-8f4d-c1edc9978e86/Workflow-hero.svg?cdnVersion=817" alt="Git Work Flows - Centralized workflow" class="lozad">
+</div>
+<h5>Siguiente paso:</h5>
+<h4>Flujo de trabajo de rama de función</h4>
+<a href="https://www.atlassian.com/es/git/tutorials/comparing-workflows/feature-branch-workflow" class="cms-link cms-link--text">Empezar el siguiente tutorial</a>
+</div></a></div>
+<div id="related-post-sidebar-flyout" class="related-post attached">
+<div class="related-post--text">
+<p>¿Listo para aprender a usar Git?</p>
+<p>Prueba este tutorial interactivo.</p>
+</div>
+<a href="https://www.atlassian.com/es/git/tutorials/learn-git-with-bitbucket-cloud" class="button green-solid standard related-post--link">Comienza ahora</a>
+</div></div>
+</div>
+<div id="footer" class="footer is-tutorial ">
+<div class="g-row _atlassian-logo">
+<div class="g-column g-12-12">
+<h5>Con tecnología de</h5>
+<a href="https://bitbucket.org/" class="cms-link cms-link--image"><img data-src="https://wac-cdn.atlassian.com/dam/jcr:c3392b46-dcac-4283-8855-dd8fda6918a0/Bitbucket-white.svg?cdnVersion=817" alt="Atlassian" class="lozad"></a>
+</div></div>
+<div class="g-row">
+<div class="g-column g-4-12 t-12-12 m-12-12 t-gutterless">
+<h6>Recomendaciones</h6>
+<a href="https://twitter.com/home?status=Switching%20to%20%23Git?%20Use%20the%20Atlassian%20Git%20tutorials%20to%20jumpstart%20your%20training%20in%20Git%20commands%20and%20workflows.%20https://www.atlassian.com/git" class="cms-link cms-link--image social-code"><img data-src="https://wac-cdn.atlassian.com/dam/jcr:69b49692-9452-4dd9-aca1-df56b2bbadbd/icon-twitter.svg?cdnVersion=817" alt="Twitter" class="lozad"></a>
+<a href="https://www.facebook.com/sharer/sharer.php?u=https://www.atlassian.com/git" class="cms-link cms-link--image social-code"><img data-src="https://wac-cdn.atlassian.com/dam/jcr:9c8da5cb-5272-4e89-9cc1-9a3f52265380/icon-facebook.svg?cdnVersion=817" alt="Facebook" class="lozad"></a>
+<a href="https://plus.google.com/share?url=https://www.atlassian.com/git" class="cms-link cms-link--image social-code"><img data-src="https://wac-cdn.atlassian.com/dam/jcr:3b592a98-07ca-48a6-8b95-e59eae543341/icon-gplus.svg?cdnVersion=817" alt="Google Plus" class="lozad"></a>
+</div><div class="g-column g-4-12 t-12-12 m-12-12 t-gutterless">
+<h6>¿Quieres enterarte de los próximos artículos?</h6>
+<form class="newsletter">
+<input class="is-empty _input" placeholder="Enter Your Email For Git News" type="email">
+<button type="submit" class="_status icon-email-submit">Submit</button>
+</form>
+</div><div class="g-column g-4-12 t-12-12 m-12-12 t-gutterless">
+<h6>Sitio alojado por</h6>
+<a href="https://www.atlassian.com/es/" class="cms-link cms-link--image"><img data-src="https://wac-cdn.atlassian.com/dam/jcr:ffd56b30-ad4d-4cb5-94be-79c1dd68b1fb/Atlassian-horizontal-white-rgb.svg?cdnVersion=817" alt="Bitbucket" class="lozad _bitbucket-logo"></a>
+</div></div>
+<div class="g-row">
+<div class="g-column g-12-12 t-12-12 m-12-12">
+<p class="license"><a class="icon-global-cclicense" href="http://creativecommons.org/licenses/by/2.5/au/" rel="nofollow">creativecommons.org</a>Salvo que se indique lo contrario, todo el contenido disponible se rige por la <a href="http://creativecommons.org/licenses/by/2.5/au/" rel="nofollow">licencia de atribución 2.5 Australia de Creative Commons</a>.</p>
+</div></div>
+</div>
+<script type="text/javascript">
+var HTTP_PREFIX = "";
+var FEATURE_FLAG_USE_GDPR = true;
+</script>
+<script type="text/javascript" src="app.js"></script>
+<link rel="stylesheet" href="site.css">
+<script type="text/javascript">
+(function(){
+var imkt = window.imkt || (window.imkt = {});
+imkt.isEditMode = false;
+imkt.isProduction = true;
+imkt.constants = imkt.constants || {};
+imkt.constants.rootPath = "/";
+imkt.constants.assetPath = "https://wac-cdn.atlassian.com" + "/assets/";
+imkt.constants.libPath = imkt.constants.assetPath + "bower_components/";
+imkt.constants.cdnVersionQuery = "?cdnVersion=817";
+imkt.constants.isDevUser = false;
+imkt.constants.isFreeEnabled = true;
+imkt.constants.getUserAccounts = false;
+imkt.constants.headerLoginMenu = true;
+imkt.constants.public = true;
+imkt.constants.mobileBreakpoint = 640;
+})();
+</script><iframe src="https://a1096093.cdn.optimizely.com/client_storage/a1096093.html" aria-hidden="true" tabindex="-1" title="Optimizely Internal Frame" style="display: none;" width="0" hidden="" height="0"></iframe>
+<script type="text/x-component">
+{
+"type":"imkt.pages.WACPage",
+"params": {
+}
+}
+</script>
+<script>
+function initializeATLAnalytics() {
+var pageViewProperties = { contentSite: 'Git Microsite', contentType: 'Microsite', contentProduct: 'Bitbucket' };
+if (typeof ace !== 'undefined') {
+ace.analytics.Initializer.initWithPageAnalytics('kiv6wyh2nw', pageViewProperties, null, null, window.atlGlobalLoadStart);
+}
+}
+</script>
+<script type="text/javascript">
+/**
+* function to load external js through javascript.
+*
+* @param url - javascript url
+* @param location - location of the dom (e.g. document.head)
+*/
+var loadExternalJS = function(url, location, callback){
+var scriptTag = document.createElement('script');
+scriptTag.src = url;
+scriptTag.type = 'text/javascript';
+/* Then bind the event to the callback function.
+There are several events for cross browser compatibility. */
+scriptTag.onreadystatechange = callback;
+scriptTag.onload = callback;
+window.atlGlobalLoadStart = new Date();
+/* Fire the loading */
+location.appendChild(scriptTag);
+};
+</script>
+<script type="text/javascript" class="optanon-category-2">
+loadExternalJS("https://atl-global.atlassian.com/js/atl-global.min.js", document.body, initializeATLAnalytics);
+</script><script src="atl-global.js" type="text/javascript"></script>
+<!-- polyfill for Object.assign & IntersectionObserver-->
+<script crossorigin="anonymous" src="polyfill.js"></script>
+<script type="text/javascript" src="lozad.js"></script>
+<script type="text/javascript">
+if (typeof toastr !== "undefined") {
+toastr.options = {
+"progressBar": true,
+"timeOut": "1500"
+}
+}
+/*Initialize library to lazy load images*/
+var observer = lozad(".lozad", {
+threshold: 0.1,
+load: function(el) {
+if (el.getAttribute("data-src") != undefined) {
+el.src = el.getAttribute("data-src");
+}
+if (typeof toastr !== "undefined") {
+el.onload = function() {
+toastr["success"](el.localName.toUpperCase() + " lazy loaded.")
+}
+}
+}
+});
+/*Picture observer*/
+/*with default `load` method*/
+var pictureObserver = lozad(".lozad-picture", {
+threshold: 0.1
+});
+/*Background observer*/
+/*with default `load` method*/
+var backgroundObserver = lozad(".lozad-background", {
+threshold: 0.1
+});
+observer.observe();
+pictureObserver.observe();
+backgroundObserver.observe();
+</script>
+
+
+
+</body><!-- LastRendered: 19-feb-2020 12:44:07 --></html>
